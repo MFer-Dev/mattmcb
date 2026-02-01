@@ -13,9 +13,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Matt McB | Product Engineer",
+  title: "Matthew McBride",
   description:
-    "Public website for Matt McB — product-minded engineer building thoughtful web platforms.",
+    "Strategy, architecture, and delivery leadership for enterprise transformation and technology adoption.",
+  openGraph: {
+    title: "Matthew McBride",
+    description:
+      "Strategy, architecture, and delivery leadership for enterprise transformation and technology adoption.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Matthew McBride",
+    description:
+      "Strategy, architecture, and delivery leadership for enterprise transformation and technology adoption.",
+  },
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -24,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
