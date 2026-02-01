@@ -125,7 +125,7 @@ const experience = [
       {
         label: "Accountability",
         value:
-          "Built and governed what became the IBM Carbon Design System for consistency at scale.",
+          "Hired to build and govern what became the IBM Carbon Design System for consistency at scale.",
       },
       {
         label: "Delivery Reality",
