@@ -18,7 +18,7 @@ export default function MobileNav({
       <button
         type="button"
         onClick={() => onToggle(!isOpen)}
-        className="fixed right-4 top-4 z-[70] inline-flex h-10 w-10 items-center justify-center border border-white/20 bg-black/40 text-slate-200 transition hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+        className="fixed right-4 top-4 z-[70] inline-flex h-10 w-10 items-center justify-center text-slate-200 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-label={isOpen ? "Close navigation" : "Open navigation"}

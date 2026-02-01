@@ -273,15 +273,11 @@ export default function Home() {
                 operating at scale.
               </p>
               <p>
-                My work spans two inseparable responsibilities: shaping the right
-                solutions to real business problems, and ensuring those solutions
-                are delivered, adopted, and executed in ways that create measurable
-                value.
-              </p>
-              <p>
-                That means working across strategy, architecture, operating models,
-                and delivery—so advanced capability, including AI, can move from
-                ambition to execution and actually stick.
+                My work focuses on shaping the right solutions first—then ensuring
+                they can be executed, governed, and adopted in real operating
+                environments. This includes advanced capability like AI, where
+                success depends as much on judgment and execution as on technology
+                itself.
               </p>
             </div>
           </section>
@@ -295,65 +291,67 @@ export default function Home() {
             >
               Snapshot
             </p>
-            <p
-              className="hero-appear mt-3 text-sm text-slate-400"
-              style={{ transitionDelay: "140ms" }}
-            >
-              This is a working snapshot of how I lead, decide, and deliver today.
-            </p>
             <div className="mt-8 max-w-[720px]">
               <p
-                className="hero-appear text-2xl font-semibold text-white sm:text-3xl"
+                className="hero-appear text-xl font-medium text-slate-200 sm:text-2xl"
                 style={{ transitionDelay: "260ms" }}
               >
-                How I lead
+                Enterprise AI adoption and execution at global scale
+              </p>
+              <p
+                className="hero-appear mt-6 text-2xl font-semibold text-white"
+                style={{ transitionDelay: "380ms" }}
+              >
+                How I work
               </p>
               <p
                 className="hero-appear mt-5 text-base leading-7 text-slate-300"
-                style={{ transitionDelay: "380ms" }}
+                style={{ transitionDelay: "500ms" }}
               >
-                I operate where solution quality and execution quality are equally
-                non-negotiable—shaping initiatives that are technically sound and
-                strategically right, then ensuring they are governed, delivered,
-                and adopted in complex enterprise environments.
+                I work at the intersection of solution design and execution—where
+                technology decisions meet real organizational constraints.
+              </p>
+              <p
+                className="hero-appear mt-4 text-base leading-7 text-slate-300"
+                style={{ transitionDelay: "560ms" }}
+              >
+                My responsibility doesn’t stop at defining what should be built.
+                It includes ensuring the solution can be delivered, adopted, and
+                operated in a way that creates durable business value.
               </p>
               <ul
                 className="hero-appear mt-6 space-y-3 text-base text-slate-300"
-                style={{ transitionDelay: "500ms" }}
+                style={{ transitionDelay: "620ms" }}
               >
                 <li className="flex gap-3">
                   <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
                   <span>
-                    Shape solutions grounded in real business constraints, not
-                    theoretical architectures
+                    Shape enterprise and AI-enabled solutions with clear intent,
+                    boundaries, and success criteria
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
                   <span>
-                    Ensure operating models, governance, and incentives support
-                    adoption—not resistance
+                    Design operating models, governance, and delivery approaches
+                    that fit the organization adopting the solution
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
                   <span>
-                    Partner with CTO/CDO and business leadership to align
-                    strategy, delivery, and risk
+                    Lead execution across globally distributed teams, partners,
+                    and delivery environments
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
                   <span>
-                    Step into high-stakes programs where ambiguity is high and
-                    failure is not an option
+                    Step directly into high-risk programs when complexity,
+                    ambiguity, or failure risk is high
                   </span>
                 </li>
               </ul>
-              <p className="hero-appear mt-6 text-base text-slate-300">
-                This work only succeeds when the right solution is built and the
-                organization is able to run it.
-              </p>
               <div
                 className="hero-appear mt-6 flex flex-wrap gap-4 text-xs font-mono uppercase tracking-[0.25em] text-slate-400"
                 style={{ transitionDelay: "620ms" }}
@@ -442,9 +440,7 @@ export default function Home() {
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
               Impact
             </p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">
-              What I’ve built
-            </h2>
+            <h2 className="mt-3 text-2xl font-semibold text-white">Impact</h2>
             <div className="mt-6 space-y-10">
               {experience.map((item) => (
                 <div key={item.title} className="border-t border-white/10 pt-6">

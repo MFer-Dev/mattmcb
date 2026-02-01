@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Matthew McBride — Making Technology Useful, Usable, and Valuable",
+  title: "Matthew McBride — Enterprise AI Adoption & Execution",
   description:
     "Digital services executive focused on enterprise AI adoption, operating models, and execution at global scale.",
   openGraph: {
