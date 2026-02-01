@@ -17,13 +17,15 @@ export default function MobileNav({
     <div className="lg:hidden">
       <button
         type="button"
-        onClick={() => onToggle(true)}
-        className="fixed right-4 top-4 z-50 inline-flex h-10 w-10 items-center justify-center border border-white/20 text-slate-200 transition hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+        onClick={() => onToggle(!isOpen)}
+        className="fixed right-4 top-4 z-[70] inline-flex h-10 w-10 items-center justify-center border border-white/20 bg-black/40 text-slate-200 transition hover:border-white/40 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
-        aria-label="Open navigation"
+        aria-label={isOpen ? "Close navigation" : "Open navigation"}
       >
-        <span className="sr-only">Open navigation</span>
+        <span className="sr-only">
+          {isOpen ? "Close navigation" : "Open navigation"}
+        </span>
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
