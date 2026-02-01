@@ -23,13 +23,13 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: -120px;
-  right: -140px;
-  width: 900px;
-  height: 900px;
+  top: -60px;
+  right: -60px;
+  width: 760px;
+  height: 760px;
   background-image: url("/trace.svg");
   background-repeat: no-repeat;
-  background-size: 900px 900px;
+  background-size: 760px 760px;
   opacity: 0.008;
   mix-blend-mode: multiply;
   pointer-events: none;
