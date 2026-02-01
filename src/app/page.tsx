@@ -240,6 +240,7 @@ export default function Home() {
       className="min-h-screen bg-[#0b0c0f] text-slate-100"
       data-mounted={mounted ? "true" : "false"}
     >
+      <div className="top-fade" aria-hidden="true" />
       <div className="fixed left-0 top-0 z-50 h-[2px] w-full bg-white/5">
         <div
           className="h-full bg-white/60"
@@ -254,7 +255,7 @@ export default function Home() {
           className="enter enter-nav"
         />
 
-        <div className="w-full enter enter-main content-fade-top">
+        <div className="w-full enter enter-main">
           <div className="flex items-center justify-between md:hidden">
             <MobileNav
               activeId={activeId}
