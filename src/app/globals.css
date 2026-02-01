@@ -39,3 +39,53 @@ body {
 [data-mounted="true"] .enter-main {
   transition-delay: 180ms;
 }
+
+[data-mounted="false"] .hero-appear,
+[data-mounted="false"] .brand-appear {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+[data-mounted="true"] .hero-appear,
+[data-mounted="true"] .brand-appear {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+  will-change: opacity, transform;
+}
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0b0c0f;
+  opacity: 1;
+  transition: opacity 320ms ease-out;
+  pointer-events: none;
+}
+
+.intro-overlay--hidden {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay {
+    transition: none;
+  }
+
+  [data-mounted="false"] .enter,
+  [data-mounted="false"] .hero-appear,
+  [data-mounted="false"] .brand-appear {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-mounted="true"] .enter,
+  [data-mounted="true"] .hero-appear,
+  [data-mounted="true"] .brand-appear {
+    transition: none;
+  }
+}

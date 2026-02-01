@@ -143,6 +143,7 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   const handleNavigate = useCallback((id: string) => {
     const element = document.getElementById(id);
@@ -219,11 +220,24 @@ export default function Home() {
     return () => window.cancelAnimationFrame(id);
   }, []);
 
+  useEffect(() => {
+    const id = window.setTimeout(() => setIsReady(true), 320);
+    return () => window.clearTimeout(id);
+  }, []);
+
   return (
     <div
       className="min-h-screen bg-[#0b0c0f] text-slate-100"
       data-mounted={mounted ? "true" : "false"}
     >
+      <div
+        className={`intro-overlay ${isReady ? "intro-overlay--hidden" : ""}`}
+        aria-hidden="true"
+      >
+        <div className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
+          Initializing context…
+        </div>
+      </div>
       <div className="fixed left-0 top-0 z-50 h-[2px] w-full bg-white/5">
         <div
           className="h-full bg-white/60"
@@ -249,34 +263,58 @@ export default function Home() {
           </div>
 
           <section id="overview" className="scroll-mt-24 pb-14 pt-6">
-            <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
+            <p
+              className="hero-appear text-xs font-mono uppercase tracking-[0.3em] text-slate-500"
+              style={{ transitionDelay: "80ms" }}
+            >
               Context
             </p>
-            <p className="mt-3 text-sm text-slate-400">
+            <p
+              className="hero-appear mt-3 text-sm text-slate-400"
+              style={{ transitionDelay: "140ms" }}
+            >
               This is a working snapshot of how I lead, think, and deliver today.
             </p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              Matthew McBride
-            </h1>
-            <h2 className="mt-3 text-base font-semibold text-slate-300">
-              Digital services executive working at the intersection of strategy,
-              operating models, and enterprise delivery
-            </h2>
-            <p className="mt-6 text-base leading-7 text-slate-300">
-              I help organizations make advanced technology useful, usable, and
-              valuable at enterprise scale. My work focuses on turning complex
-              capability — including AI — into outcomes companies can govern,
-              deliver, and sustain.
-            </p>
-            <ul className="mt-6 space-y-3 text-base text-slate-300">
+            <div
+              className="hero-appear mt-6 max-w-[720px] border border-white/10 bg-white/[0.02] p-8"
+              style={{ transitionDelay: "200ms" }}
+            >
+              <h1
+                className="hero-appear text-4xl font-semibold leading-tight text-white sm:text-5xl"
+                style={{ transitionDelay: "280ms" }}
+              >
+                Matthew McBride
+              </h1>
+              <p
+                className="hero-appear mt-3 text-base font-semibold text-slate-200"
+                style={{ transitionDelay: "360ms" }}
+              >
+                Enterprise AI adoption and operating-model execution at global scale.
+              </p>
+              <p
+                className="hero-appear mt-5 text-base leading-7 text-slate-300"
+                style={{ transitionDelay: "440ms" }}
+              >
+                I help organizations make advanced technology useful, usable, and
+                valuable at enterprise scale. My work focuses on turning complex
+                capability — including AI — into outcomes companies can govern,
+                deliver, and sustain.
+              </p>
+              <ul
+                className="hero-appear mt-6 space-y-3 text-base text-slate-300"
+                style={{ transitionDelay: "520ms" }}
+              >
               {overviewBullets.map((item) => (
                 <li key={item} className="flex gap-3">
                   <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
                   <span>{item}</span>
                 </li>
               ))}
-            </ul>
-            <div className="mt-6 flex flex-wrap gap-4 text-xs font-mono uppercase tracking-[0.25em] text-slate-400">
+              </ul>
+              <div
+                className="hero-appear mt-6 flex flex-wrap gap-4 text-xs font-mono uppercase tracking-[0.25em] text-slate-400"
+                style={{ transitionDelay: "600ms" }}
+              >
               <a
                 href="https://www.linkedin.com/in/mattmcb"
                 target="_blank"
@@ -301,6 +339,7 @@ export default function Home() {
               >
                 Resume
               </a>
+            </div>
             </div>
           </section>
 

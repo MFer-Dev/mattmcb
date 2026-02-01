@@ -14,10 +14,26 @@ export default function SideNav({
 }: SideNavProps) {
   return (
     <aside
-      className={`sticky top-10 hidden h-[calc(100vh-5rem)] w-[240px] shrink-0 border-r border-white/10 pr-6 md:flex md:flex-col ${
+      className={`sticky top-12 hidden h-[calc(100vh-6rem)] w-[240px] shrink-0 border-r border-white/10 pr-6 md:flex md:flex-col ${
         className ?? ""
       }`}
     >
+      <div className="brand-appear pb-6">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-xs font-mono text-slate-200">
+            MM
+          </div>
+          <div>
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-300">
+              MATTHEW MCBRIDE
+            </p>
+            <p className="mt-2 text-xs text-slate-500">
+              Strategy • Operating models • Delivery
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-white/10 pt-6">
       <nav className="space-y-2">
         {sections.map((section) => {
           const isActive = activeId === section.id;
@@ -40,6 +56,7 @@ export default function SideNav({
           );
         })}
       </nav>
+      </div>
     </aside>
   );
 }
