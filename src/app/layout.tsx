@@ -13,20 +13,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Matthew McBride",
+  title: "Matthew McBride — Making Technology Useful, Usable, and Valuable",
   description:
-    "Strategy, architecture, and delivery leadership for enterprise transformation and technology adoption.",
+    "Digital services executive focused on enterprise AI adoption, operating models, and execution at global scale.",
   openGraph: {
-    title: "Matthew McBride",
+    title: "Matthew McBride — Enterprise AI Adoption & Operating Model Execution",
     description:
-      "Strategy, architecture, and delivery leadership for enterprise transformation and technology adoption.",
+      "Turning complex technology into usable, governed, and durable enterprise capability.",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Matthew McBride",
+    title: "Matthew McBride — Enterprise AI Adoption & Operating Model Execution",
     description:
-      "Strategy, architecture, and delivery leadership for enterprise transformation and technology adoption.",
+      "Turning complex technology into usable, governed, and durable enterprise capability.",
   },
   icons: {
     icon: "/577278.png",

@@ -267,18 +267,15 @@ export default function Home() {
 
           <section ref={openingRef} className="pb-12 pt-6">
             <div className="max-w-[640px] space-y-5 text-base leading-7 text-slate-300">
-              <p className="text-sm text-slate-400">
-                I build the bridge between ambition and reality.
-              </p>
-              <p>Hi. I’m Matthew.</p>
+              <p>Hi, I’m Matthew.</p>
               <p>
-                I’ve spent my career working between ambition and reality—where
-                new technology meets real organizations and real constraints.
+                I make technology useful, usable, and valuable for organizations
+                operating at scale.
               </p>
               <p>
-                My work turns complexity into something usable and sustainable:
-                shaping operating models, governance, and delivery so advanced
-                capability can take root and endure.
+                My work focuses on shaping operating models, governance, and
+                delivery so advanced capability — including AI — can be adopted,
+                executed, and sustained in the real world.
               </p>
             </div>
           </section>
