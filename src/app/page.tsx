@@ -6,10 +6,10 @@ import MobileNav from "@/components/MobileNav";
 import { sections } from "@/lib/sections";
 
 const overviewBullets = [
-  "C-1 executive reporting to a CTO/CDO; board-level accountability for delivery performance, operational risk, and capability strategy.",
-  "Leads globally distributed teams across 20+ countries delivering in hybrid, on-site, and remote models.",
-  "Specializes in AI-enabled transformation, business and enterprise architecture, and operating-model execution.",
-  "Hands-on leader on high-risk programs when complexity and ambiguity exceed standard delivery models.",
+  "C-1 leader partnering with CTO/CDO organizations on delivery performance, risk, and capability strategy.",
+  "Leads globally distributed teams across 20+ countries delivering hybrid, on-site, and remote.",
+  "Works at the intersection of AI adoption, enterprise architecture, and operating-model execution.",
+  "Steps into high-stakes programs when complexity is high and failure isn’t an option.",
 ];
 
 const howIWork = [
@@ -255,7 +255,7 @@ export default function Home() {
           className="enter enter-nav"
         />
 
-        <div className="w-full enter enter-main">
+        <div className="w-full enter enter-main pt-16 md:pt-12 lg:pt-0">
           <div className="flex items-center justify-between md:hidden">
             <MobileNav
               activeId={activeId}
@@ -267,16 +267,18 @@ export default function Home() {
 
           <section ref={openingRef} className="pb-12 pt-6">
             <div className="max-w-[640px] space-y-5 text-base leading-7 text-slate-300">
+              <p className="text-sm text-slate-400">
+                I build the bridge between ambition and reality.
+              </p>
               <p>Hi. I’m Matthew.</p>
               <p>
-                I’ve spent my career working in the space between ambition and
-                reality—where new technology meets real organizations, real
-                people, and real constraints.
+                I’ve spent my career working between ambition and reality—where
+                new technology meets real organizations and real constraints.
               </p>
               <p>
-                My work is about turning complexity into something usable and
-                sustainable: shaping operating models, governance, and delivery
-                so advanced capability can actually take root and endure.
+                My work turns complexity into something usable and sustainable:
+                shaping operating models, governance, and delivery so advanced
+                capability can take root and endure.
               </p>
             </div>
           </section>
@@ -298,10 +300,10 @@ export default function Home() {
             </p>
             <div className="mt-8 max-w-[720px]">
               <p
-                className="hero-appear text-xl font-medium text-slate-200 sm:text-2xl"
+                className="hero-appear text-2xl font-semibold text-white sm:text-3xl"
                 style={{ transitionDelay: "260ms" }}
               >
-                Enterprise AI adoption and operating-model execution at global scale.
+                How I lead.
               </p>
               <p
                 className="hero-appear mt-5 text-base leading-7 text-slate-300"
@@ -388,7 +390,7 @@ export default function Home() {
               Method
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
-              How I operate
+              How I work
             </h2>
             <div className="mt-6 space-y-6">
               {howIWork.map((item) => (
@@ -451,11 +453,9 @@ export default function Home() {
             className="scroll-mt-24 border-t border-white/10 py-12"
           >
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              Contact
+              Connect
             </p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">
-              Get in touch
-            </h2>
+            <h2 className="mt-3 text-2xl font-semibold text-white">Contact</h2>
             <p className="mt-4 text-base leading-7 text-slate-300">
               Best way to reach me is email. I’m open to roles where delivery
               discipline meets frontier technology.

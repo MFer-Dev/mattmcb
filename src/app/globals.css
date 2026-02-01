@@ -31,7 +31,9 @@ body::before {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: top right;
-  opacity: 0.1;
+  opacity: 0.06;
+  -webkit-mask-image: linear-gradient(to bottom left, rgba(0, 0, 0, 0.9), transparent);
+  mask-image: linear-gradient(to bottom left, rgba(0, 0, 0, 0.9), transparent);
   pointer-events: none;
   z-index: 0;
 }
@@ -47,7 +49,9 @@ body::after {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom left;
-  opacity: 0.1;
+  opacity: 0.06;
+  -webkit-mask-image: linear-gradient(to top right, rgba(0, 0, 0, 0.9), transparent);
+  mask-image: linear-gradient(to top right, rgba(0, 0, 0, 0.9), transparent);
   pointer-events: none;
   z-index: 0;
 }

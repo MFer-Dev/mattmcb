@@ -14,7 +14,7 @@ export default function SideNav({
 }: SideNavProps) {
   return (
     <aside
-      className={`sticky top-14 hidden h-[calc(100vh-7rem)] w-[240px] shrink-0 border-r border-white/10 pr-6 md:flex md:flex-col ${
+      className={`sticky top-16 hidden h-[calc(100vh-8rem)] w-[240px] shrink-0 border-r border-white/10 pr-6 lg:flex lg:flex-col ${
         className ?? ""
       }`}
     >
