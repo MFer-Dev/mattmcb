@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { sections } from "@/lib/sections";
 
 type MobileNavProps = {
@@ -14,10 +13,6 @@ export default function MobileNav({
   onToggle,
   onNavigate,
 }: MobileNavProps) {
-  const activeLabel = useMemo(() => {
-    return sections.find((section) => section.id === activeId)?.label ?? "Overview";
-  }, [activeId]);
-
   return (
     <div className="md:hidden">
       <button
@@ -26,9 +21,9 @@ export default function MobileNav({
         className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
+        aria-label="Open menu"
       >
         Menu
-        <span className="text-xs font-normal text-slate-400">{activeLabel}</span>
       </button>
 
       {isOpen ? (
@@ -57,10 +52,10 @@ export default function MobileNav({
                       onNavigate(section.id);
                       onToggle(false);
                     }}
-                    className={`flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ${
+                    className={`flex w-full items-center justify-between rounded-md border-l-2 px-3 py-2 text-left text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ${
                       isActive
-                        ? "bg-white/10 text-white"
-                        : "text-slate-300 hover:bg-white/5 hover:text-white"
+                        ? "border-white/70 bg-white/10 text-white"
+                        : "border-transparent text-slate-300 hover:bg-white/5 hover:text-white"
                     }`}
                   >
                     {section.label}

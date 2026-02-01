@@ -23,18 +23,12 @@ export default function SideNav({ activeId, onNavigate }: SideNavProps) {
                 event.preventDefault();
                 onNavigate(section.id);
               }}
-              className={`group flex items-center gap-3 rounded-md py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ${
+              className={`flex w-full items-center rounded-md border-l-2 px-3 py-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 ${
                 isActive
-                  ? "text-white"
-                  : "text-slate-400 hover:text-slate-200"
+                  ? "border-white/70 bg-white/5 text-white"
+                  : "border-transparent text-slate-400 hover:bg-white/5 hover:text-slate-200"
               }`}
             >
-              <span
-                className={`h-5 w-1 rounded-full transition ${
-                  isActive ? "bg-white" : "bg-transparent group-hover:bg-slate-600"
-                }`}
-                aria-hidden="true"
-              />
               {section.label}
             </Link>
           );

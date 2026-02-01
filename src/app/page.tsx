@@ -202,7 +202,7 @@ export default function Home() {
             </div>
           </section>
 
-          <footer className="border-t border-white/10 py-10 text-sm text-slate-500">
+          <footer className="mt-10 border-t border-white/10 py-10 text-sm text-slate-500">
             © {new Date().getFullYear()} Matthew McBride · mattmcb.me ·
             Intentionally minimal
           </footer>
