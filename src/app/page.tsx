@@ -254,7 +254,7 @@ export default function Home() {
           className="enter enter-nav"
         />
 
-        <div className="w-full enter enter-main">
+        <div className="w-full enter enter-main content-fade-top">
           <div className="flex items-center justify-between md:hidden">
             <MobileNav
               activeId={activeId}
