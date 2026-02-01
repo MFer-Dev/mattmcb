@@ -23,15 +23,29 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: -60px;
-  right: -60px;
-  width: 760px;
-  height: 760px;
-  background-image: url("/trace.svg");
+  top: 0;
+  right: 0;
+  width: 420px;
+  height: 420px;
+  background-image: url("/top-right.png");
   background-repeat: no-repeat;
-  background-size: 760px 760px;
-  opacity: 0.012;
-  mix-blend-mode: multiply;
+  background-size: contain;
+  background-position: top right;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 420px;
+  height: 420px;
+  background-image: url("/btm-left.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom left;
   pointer-events: none;
   z-index: 0;
 }
