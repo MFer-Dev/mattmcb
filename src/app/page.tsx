@@ -248,7 +248,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 px-6 pb-16 pt-12 lg:grid-cols-[240px_minmax(0,760px)_260px]">
+      <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-10 px-6 pb-16 pt-12 lg:grid-cols-[240px_minmax(0,860px)_260px]">
         <SideNav
           activeId={activeId}
           onNavigate={handleNavigate}
