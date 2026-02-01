@@ -12,6 +12,24 @@ const overviewBullets = [
   "Hands-on leader on high-risk programs when complexity and ambiguity exceed standard delivery models.",
 ];
 
+const howIWork = [
+  {
+    title: "Make capability deliverable",
+    detail:
+      "Technology only matters if it fits the operating model, incentives, and delivery reality of the organization adopting it.",
+  },
+  {
+    title: "Treat governance as a product",
+    detail:
+      "Good governance isn’t overhead — it’s how risk is reduced and value is protected at scale.",
+  },
+  {
+    title: "Execution is strategy when stakes are high",
+    detail:
+      "In complex transformations, the quality of execution is the strategy.",
+  },
+];
+
 const focusAreas = [
   "AI-enabled operating models",
   "Enterprise transformation delivery",
@@ -22,48 +40,100 @@ const experience = [
   {
     title: "SVP, Digital Strategy & Innovation — SoftServe",
     dates: "2021–Present",
-    bullets: [
-      "Global leader for a horizontal Digital Strategy & Innovation organization operating across industries, geographies, and delivery segments.",
-      "Leads a cross-functional org spanning experience design, business analysis, product management, solution consulting, transformation management, organizational change, and embedded business/enterprise architecture.",
-      "Shapes solution strategy and oversees delivery of highly complex, multi-year programs; accountable for outcomes, not just execution.",
-      "Partners with hyperscalers and the AI ecosystem; drives AI advisory and AI-enabled transformation motions in collaboration with internal partnership leaders.",
-      "Regularly presents delivery health, operational performance, and capability strategy in executive and board contexts.",
+    framing:
+      "Lead a horizontal strategy and delivery organization brought in when complexity is high and failure is not an option.",
+    modules: [
+      {
+        label: "Scope",
+        value:
+          "Global Digital Strategy & Innovation organization operating across industries, geographies, and delivery segments.",
+      },
+      {
+        label: "Accountability",
+        value:
+          "Accountable for delivery outcomes, operational risk, and capability strategy in executive and board contexts.",
+      },
+      {
+        label: "Operating Model",
+        value:
+          "Cross-functional org spanning experience design, business analysis, product management, solution consulting, transformation management, organizational change, and embedded architecture.",
+      },
+      {
+        label: "Delivery Reality",
+        value:
+          "Owns strategy and oversight for complex, multi-year programs where ambiguity and risk are high.",
+      },
     ],
   },
   {
     title: "VP, Digital Strategy & Design — SoftServe",
     dates: "2020–2021",
-    bullets: [
-      "Ran global design plus digital strategy & transformation consulting as a single executive scope.",
-      "Founded and built the digital strategy function and organizational change management capability.",
-      "Led enterprise transformation programs across employee, customer, and business experience—before BA/PM/architecture consolidated into the broader org.",
+    framing:
+      "Built the strategic foundation for enterprise transformation work and scaled advisory delivery.",
+    modules: [
+      {
+        label: "Scope",
+        value:
+          "Global design plus digital strategy & transformation consulting under a single executive remit.",
+      },
+      {
+        label: "Accountability",
+        value:
+          "Founded the digital strategy function and organizational change management capability.",
+      },
+      {
+        label: "Delivery Reality",
+        value:
+          "Led transformation programs across employee, customer, and business experience.",
+      },
     ],
   },
   {
     title: "VP, Global Experience Design — SoftServe",
     dates: "2016–2021",
-    bullets: [
-      "Recruited to build and scale SoftServe’s global experience design capability from an early-stage team into a global practice.",
-      "Helped shift the company’s go-to-market from technology-first delivery to experience-led transformation focused on business and human outcomes.",
-      "Built design operations, leadership structures, and delivery models that positioned experience as a strategic differentiator.",
+    framing:
+      "Scaled experience design into a global capability that shifted go-to-market focus.",
+    modules: [
+      {
+        label: "Scope",
+        value:
+          "Built and scaled the global experience design practice from early stage.",
+      },
+      {
+        label: "Operating Model",
+        value:
+          "Established design operations, leadership structures, and delivery models.",
+      },
+      {
+        label: "Accountability",
+        value:
+          "Positioned experience as a strategic differentiator for enterprise transformation.",
+      },
     ],
   },
   {
     title: "Senior Manager, Platform Experience — IBM Cloud / IBM Design",
     dates: "2015–2016",
-    bullets: [
-      "Led a cross-functional platform team spanning design, engineering, and architecture to define IBM Cloud’s experience architecture and governance.",
-      "Built and governed what became the IBM Carbon Design System, enabling consistent delivery across cloud products and services.",
-      "Partnered with enterprise customers through IBM Garage-style engagements: co-creation, workshops, innovation programs driving adoption.",
+    framing:
+      "Defined platform experience governance to align distributed product ecosystems.",
+    modules: [
+      {
+        label: "Scope",
+        value:
+          "Led cross-functional platform team spanning design, engineering, and architecture.",
+      },
+      {
+        label: "Accountability",
+        value:
+          "Built and governed what became the IBM Carbon Design System for consistency at scale.",
+      },
+      {
+        label: "Delivery Reality",
+        value:
+          "Partnered with enterprise customers through IBM Garage-style engagements driving adoption.",
+      },
     ],
   },
-];
-
-const selectedWork = [
-  "Enterprise marketing and operating model transformation",
-  "AI-enabled product and platform strategy",
-  "Global experience modernization across complex portfolios",
-  "Governance and adoption frameworks for large transformations",
 ];
 
 export default function Home() {
@@ -172,13 +242,15 @@ export default function Home() {
             <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
               Matthew McBride
             </h1>
-            <p className="mt-3 text-base font-semibold text-slate-300">
-              Digital services executive • enterprise AI-enabled transformation
-            </p>
+            <h2 className="mt-3 text-base font-semibold text-slate-300">
+              Digital services executive working at the intersection of strategy,
+              operating models, and enterprise delivery
+            </h2>
             <p className="mt-6 text-base leading-7 text-slate-300">
-              I lead global, cross-functional teams that sit between strategy,
-              technology, and delivery—helping enterprises make technology
-              useful, usable, and valuable in the real world.
+              I help organizations make advanced technology useful, usable, and
+              valuable at enterprise scale. My work focuses on turning complex
+              capability — including AI — into outcomes companies can govern,
+              deliver, and sustain.
             </p>
             <ul className="mt-6 space-y-3 text-base text-slate-300">
               {overviewBullets.map((item) => (
@@ -240,6 +312,30 @@ export default function Home() {
           </section>
 
           <section
+            id="how-i-work"
+            className="scroll-mt-24 border-t border-white/10 py-12"
+          >
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
+              How I Work
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold text-white">
+              How I Work
+            </h2>
+            <div className="mt-6 space-y-6">
+              {howIWork.map((item) => (
+                <div key={item.title} className="border-l border-white/10 pl-5">
+                  <p className="text-sm font-semibold text-slate-200">
+                    {item.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">
+                    {item.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section
             id="experience"
             className="scroll-mt-24 border-t border-white/10 py-12"
           >
@@ -247,7 +343,7 @@ export default function Home() {
               Experience
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">Experience</h2>
-            <div className="mt-6 space-y-8">
+            <div className="mt-6 space-y-10">
               {experience.map((item) => (
                 <div key={item.title} className="border-t border-white/10 pt-6">
                   <h3 className="text-lg font-semibold text-white">
@@ -256,37 +352,27 @@ export default function Home() {
                   <p className="mt-2 text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
                     {item.dates}
                   </p>
-                  <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-300">
-                    {item.bullets.map((bullet) => (
-                      <li key={bullet} className="flex gap-3">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-600" />
-                        <span>{bullet}</span>
-                      </li>
+                  <p className="mt-4 text-sm leading-6 text-slate-300">
+                    {item.framing}
+                  </p>
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    {item.modules.map((module) => (
+                      <div
+                        key={module.label}
+                        className="border-l border-white/10 pl-4"
+                      >
+                        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-500">
+                          {module.label}
+                        </p>
+                        <p className="mt-2 text-sm leading-6 text-slate-300">
+                          {module.value}
+                        </p>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               ))}
             </div>
-          </section>
-
-          <section
-            id="selected-work"
-            className="scroll-mt-24 border-t border-white/10 py-12"
-          >
-            <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              Selected Work
-            </p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">
-              Selected Work
-            </h2>
-            <ul className="mt-6 space-y-3 text-base text-slate-300">
-              {selectedWork.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
           </section>
 
           <section
