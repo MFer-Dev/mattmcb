@@ -21,9 +21,20 @@ export default function MobileNav({
         className="inline-flex items-center gap-2 border border-white/15 px-3 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-200 transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
-        aria-label="Open menu"
+        aria-label="Open navigation"
       >
-        Menu
+        <span className="sr-only">Open navigation</span>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          className="h-4 w-4 text-slate-200"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        >
+          <path d="M4 7h16M4 12h16M4 17h10" />
+        </svg>
       </button>
 
       {isOpen ? (
