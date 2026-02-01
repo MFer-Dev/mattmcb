@@ -143,7 +143,6 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mounted, setMounted] = useState(false);
-  const [isReady, setIsReady] = useState(false);
 
   const handleNavigate = useCallback((id: string) => {
     const element = document.getElementById(id);
@@ -220,24 +219,11 @@ export default function Home() {
     return () => window.cancelAnimationFrame(id);
   }, []);
 
-  useEffect(() => {
-    const id = window.setTimeout(() => setIsReady(true), 320);
-    return () => window.clearTimeout(id);
-  }, []);
-
   return (
     <div
       className="min-h-screen bg-[#0b0c0f] text-slate-100"
       data-mounted={mounted ? "true" : "false"}
     >
-      <div
-        className={`intro-overlay ${isReady ? "intro-overlay--hidden" : ""}`}
-        aria-hidden="true"
-      >
-        <div className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-          Initializing context…
-        </div>
-      </div>
       <div className="fixed left-0 top-0 z-50 h-[2px] w-full bg-white/5">
         <div
           className="h-full bg-white/60"
@@ -267,7 +253,7 @@ export default function Home() {
               className="hero-appear text-xs font-mono uppercase tracking-[0.3em] text-slate-500"
               style={{ transitionDelay: "80ms" }}
             >
-              Context
+              Snapshot
             </p>
             <p
               className="hero-appear mt-3 text-sm text-slate-400"
@@ -276,21 +262,21 @@ export default function Home() {
               This is a working snapshot of how I lead, think, and deliver today.
             </p>
             <div className="mt-6 max-w-[720px]">
+              <p
+                className="hero-appear text-2xl font-semibold text-white sm:text-3xl"
+                style={{ transitionDelay: "260ms" }}
+              >
+                Enterprise AI adoption and operating-model execution at global scale.
+              </p>
               <h1
-                className="hero-appear text-4xl font-semibold leading-tight text-white sm:text-5xl"
-                style={{ transitionDelay: "200ms" }}
+                className="hero-appear mt-4 text-4xl font-semibold leading-tight text-white sm:text-5xl"
+                style={{ transitionDelay: "380ms" }}
               >
                 Matthew McBride
               </h1>
               <p
-                className="hero-appear mt-3 text-base font-semibold text-slate-200"
-                style={{ transitionDelay: "280ms" }}
-              >
-                Enterprise AI adoption and operating-model execution at global scale.
-              </p>
-              <p
                 className="hero-appear mt-5 text-base leading-7 text-slate-300"
-                style={{ transitionDelay: "360ms" }}
+                style={{ transitionDelay: "500ms" }}
               >
                 I help organizations make advanced technology useful, usable, and
                 valuable at enterprise scale. My work focuses on turning complex
@@ -299,7 +285,7 @@ export default function Home() {
               </p>
               <ul
                 className="hero-appear mt-6 space-y-3 text-base text-slate-300"
-                style={{ transitionDelay: "440ms" }}
+                style={{ transitionDelay: "620ms" }}
               >
                 {overviewBullets.map((item) => (
                   <li key={item} className="flex gap-3">
@@ -310,7 +296,7 @@ export default function Home() {
               </ul>
               <div
                 className="hero-appear mt-6 flex flex-wrap gap-4 text-xs font-mono uppercase tracking-[0.25em] text-slate-400"
-                style={{ transitionDelay: "520ms" }}
+                style={{ transitionDelay: "760ms" }}
               >
                 <a
                   href="https://www.linkedin.com/in/mattmcb"
@@ -394,7 +380,7 @@ export default function Home() {
             className="scroll-mt-24 border-t border-white/10 py-12"
           >
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              Track
+              Impact
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
               What I’ve built
@@ -436,7 +422,7 @@ export default function Home() {
             className="scroll-mt-24 border-t border-white/10 py-12"
           >
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              Connect
+              Contact
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
               Get in touch
