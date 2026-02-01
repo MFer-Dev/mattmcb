@@ -273,9 +273,15 @@ export default function Home() {
                 operating at scale.
               </p>
               <p>
-                My work focuses on shaping operating models, governance, and
-                delivery so advanced capability — including AI — can be adopted,
-                executed, and sustained in the real world.
+                My work spans two inseparable responsibilities: shaping the right
+                solutions to real business problems, and ensuring those solutions
+                are delivered, adopted, and executed in ways that create measurable
+                value.
+              </p>
+              <p>
+                That means working across strategy, architecture, operating models,
+                and delivery—so advanced capability, including AI, can move from
+                ambition to execution and actually stick.
               </p>
             </div>
           </section>
@@ -293,35 +299,61 @@ export default function Home() {
               className="hero-appear mt-3 text-sm text-slate-400"
               style={{ transitionDelay: "140ms" }}
             >
-              This is a working snapshot of how I lead, think, and deliver today.
+              This is a working snapshot of how I lead, decide, and deliver today.
             </p>
             <div className="mt-8 max-w-[720px]">
               <p
                 className="hero-appear text-2xl font-semibold text-white sm:text-3xl"
                 style={{ transitionDelay: "260ms" }}
               >
-                How I lead.
+                How I lead
               </p>
               <p
                 className="hero-appear mt-5 text-base leading-7 text-slate-300"
                 style={{ transitionDelay: "380ms" }}
               >
-                I help organizations make advanced technology useful, usable, and
-                valuable at enterprise scale. My work focuses on turning complex
-                capability — including AI — into outcomes companies can govern,
-                deliver, and sustain.
+                I operate where solution quality and execution quality are equally
+                non-negotiable—shaping initiatives that are technically sound and
+                strategically right, then ensuring they are governed, delivered,
+                and adopted in complex enterprise environments.
               </p>
               <ul
                 className="hero-appear mt-6 space-y-3 text-base text-slate-300"
                 style={{ transitionDelay: "500ms" }}
               >
-                {overviewBullets.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
-                    <span>{item}</span>
-                  </li>
-                ))}
+                <li className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
+                  <span>
+                    Shape solutions grounded in real business constraints, not
+                    theoretical architectures
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
+                  <span>
+                    Ensure operating models, governance, and incentives support
+                    adoption—not resistance
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
+                  <span>
+                    Partner with CTO/CDO and business leadership to align
+                    strategy, delivery, and risk
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
+                  <span>
+                    Step into high-stakes programs where ambiguity is high and
+                    failure is not an option
+                  </span>
+                </li>
               </ul>
+              <p className="hero-appear mt-6 text-base text-slate-300">
+                This work only succeeds when the right solution is built and the
+                organization is able to run it.
+              </p>
               <div
                 className="hero-appear mt-6 flex flex-wrap gap-4 text-xs font-mono uppercase tracking-[0.25em] text-slate-400"
                 style={{ transitionDelay: "620ms" }}
