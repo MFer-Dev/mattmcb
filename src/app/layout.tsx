@@ -29,7 +29,7 @@ export const metadata: Metadata = {
       "Strategy, architecture, and delivery leadership for enterprise transformation and technology adoption.",
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: "/577278.png",
   },
 };
 

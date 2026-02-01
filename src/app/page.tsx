@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import SideNav from "@/components/SideNav";
 import MobileNav from "@/components/MobileNav";
@@ -83,9 +84,20 @@ export default function Home() {
           </div>
 
           <header className="mt-8 md:mt-0">
-            <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              Matthew McBride
-            </h1>
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                <Image
+                  src="/577278.png"
+                  alt="Matthew McBride monogram"
+                  width={44}
+                  height={44}
+                  priority
+                />
+              </div>
+              <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+                Matthew McBride
+              </h1>
+            </div>
             <p className="mt-4 text-lg text-slate-200">
               Strategy, architecture, and delivery leadership for enterprise
               transformation and technology adoption.
