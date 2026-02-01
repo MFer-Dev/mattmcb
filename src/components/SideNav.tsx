@@ -4,15 +4,21 @@ import { sections } from "@/lib/sections";
 type SideNavProps = {
   activeId: string;
   onNavigate: (id: string) => void;
+  className?: string;
 };
 
-export default function SideNav({ activeId, onNavigate }: SideNavProps) {
+export default function SideNav({
+  activeId,
+  onNavigate,
+  className,
+}: SideNavProps) {
   return (
-    <aside className="sticky top-10 hidden h-[calc(100vh-5rem)] w-[240px] shrink-0 border-r border-white/10 pr-6 md:flex md:flex-col">
-      <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-        Navigation
-      </p>
-      <nav className="mt-6 space-y-2">
+    <aside
+      className={`sticky top-10 hidden h-[calc(100vh-5rem)] w-[240px] shrink-0 border-r border-white/10 pr-6 md:flex md:flex-col ${
+        className ?? ""
+      }`}
+    >
+      <nav className="space-y-2">
         {sections.map((section) => {
           const isActive = activeId === section.id;
           return (

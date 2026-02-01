@@ -14,7 +14,7 @@ const overviewBullets = [
 
 const howIWork = [
   {
-    title: "Make capability deliverable",
+    title: "Make adoption executable",
     detail:
       "Technology only matters if it fits the operating model, incentives, and delivery reality of the organization adopting it.",
   },
@@ -142,6 +142,7 @@ export default function Home() {
   );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   const handleNavigate = useCallback((id: string) => {
     const element = document.getElementById(id);
@@ -213,8 +214,16 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const id = window.requestAnimationFrame(() => setMounted(true));
+    return () => window.cancelAnimationFrame(id);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#0b0c0f] text-slate-100">
+    <div
+      className="min-h-screen bg-[#0b0c0f] text-slate-100"
+      data-mounted={mounted ? "true" : "false"}
+    >
       <div className="fixed left-0 top-0 z-50 h-[2px] w-full bg-white/5">
         <div
           className="h-full bg-white/60"
@@ -223,9 +232,13 @@ export default function Home() {
       </div>
 
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 px-6 pb-16 pt-12 lg:grid-cols-[240px_minmax(0,760px)_260px]">
-        <SideNav activeId={activeId} onNavigate={handleNavigate} />
+        <SideNav
+          activeId={activeId}
+          onNavigate={handleNavigate}
+          className="enter enter-nav"
+        />
 
-        <div className="w-full">
+        <div className="w-full enter enter-main">
           <div className="flex items-center justify-between md:hidden">
             <MobileNav
               activeId={activeId}
@@ -237,7 +250,10 @@ export default function Home() {
 
           <section id="overview" className="scroll-mt-24 pb-14 pt-6">
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              Overview
+              Context
+            </p>
+            <p className="mt-3 text-sm text-slate-400">
+              This is a working snapshot of how I lead, think, and deliver today.
             </p>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
               Matthew McBride
@@ -296,7 +312,7 @@ export default function Home() {
               Focus
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
-              What I’m Working On
+              Current focus
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-300">
               Right now I’m focused on enterprise AI adoption: turning advanced
@@ -318,10 +334,10 @@ export default function Home() {
             className="scroll-mt-24 border-t border-white/10 py-12"
           >
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              Approach
+              Method
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
-              How I Think About Delivery
+              How I operate
             </h2>
             <div className="mt-6 space-y-6">
               {howIWork.map((item) => (
@@ -342,10 +358,10 @@ export default function Home() {
             className="scroll-mt-24 border-t border-white/10 py-12"
           >
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              Background
+              Track
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
-              What I’ve Built and Led
+              What I’ve built
             </h2>
             <div className="mt-6 space-y-10">
               {experience.map((item) => (
@@ -384,9 +400,11 @@ export default function Home() {
             className="scroll-mt-24 border-t border-white/10 py-12"
           >
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              Contact
+              Connect
             </p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Contact</h2>
+            <h2 className="mt-3 text-2xl font-semibold text-white">
+              Get in touch
+            </h2>
             <p className="mt-4 text-base leading-7 text-slate-300">
               Best way to reach me is email. I’m open to roles where delivery
               discipline meets frontier technology.

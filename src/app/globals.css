@@ -19,3 +19,23 @@ body {
   color: #e2e8f0;
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
+
+[data-mounted="false"] .enter {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+[data-mounted="true"] .enter {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 400ms ease-out, transform 400ms ease-out;
+  will-change: opacity, transform;
+}
+
+[data-mounted="true"] .enter-nav {
+  transition-delay: 80ms;
+}
+
+[data-mounted="true"] .enter-main {
+  transition-delay: 180ms;
+}

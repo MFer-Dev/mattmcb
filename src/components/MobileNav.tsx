@@ -29,10 +29,7 @@ export default function MobileNav({
       {isOpen ? (
         <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm">
           <div className="absolute inset-x-4 top-6 border border-white/10 bg-slate-950 p-6 shadow-lg">
-            <div className="flex items-center justify-between">
-              <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-                Navigation
-              </p>
+            <div className="flex items-center justify-end">
               <button
                 type="button"
                 onClick={() => onToggle(false)}
