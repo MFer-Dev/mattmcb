@@ -20,6 +20,22 @@ body {
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: -120px;
+  right: -140px;
+  width: 900px;
+  height: 900px;
+  background-image: url("/trace.svg");
+  background-repeat: no-repeat;
+  background-size: 900px 900px;
+  opacity: 0.008;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
 [data-mounted="false"] .enter {
   opacity: 0;
   transform: translateY(16px);
