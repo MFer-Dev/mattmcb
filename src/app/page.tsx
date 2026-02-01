@@ -293,9 +293,11 @@ export default function Home() {
             className="scroll-mt-24 border-t border-white/10 py-12"
           >
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              Now
+              Focus
             </p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Now</h2>
+            <h2 className="mt-3 text-2xl font-semibold text-white">
+              What I’m Working On
+            </h2>
             <p className="mt-4 text-base leading-7 text-slate-300">
               Right now I’m focused on enterprise AI adoption: turning advanced
               capability into repeatable delivery—governance, operating models,
@@ -316,10 +318,10 @@ export default function Home() {
             className="scroll-mt-24 border-t border-white/10 py-12"
           >
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              How I Work
+              Approach
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
-              How I Work
+              How I Think About Delivery
             </h2>
             <div className="mt-6 space-y-6">
               {howIWork.map((item) => (
@@ -340,9 +342,11 @@ export default function Home() {
             className="scroll-mt-24 border-t border-white/10 py-12"
           >
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-500">
-              Experience
+              Background
             </p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Experience</h2>
+            <h2 className="mt-3 text-2xl font-semibold text-white">
+              What I’ve Built and Led
+            </h2>
             <div className="mt-6 space-y-10">
               {experience.map((item) => (
                 <div key={item.title} className="border-t border-white/10 pt-6">
