@@ -302,15 +302,9 @@ export default function Home() {
               >
                 Enterprise AI adoption and operating-model execution at global scale.
               </p>
-              <h1
-                className="hero-appear mt-4 text-4xl font-semibold leading-tight text-white sm:text-5xl"
-                style={{ transitionDelay: "380ms" }}
-              >
-                Matthew McBride
-              </h1>
               <p
                 className="hero-appear mt-5 text-base leading-7 text-slate-300"
-                style={{ transitionDelay: "500ms" }}
+                style={{ transitionDelay: "380ms" }}
               >
                 I help organizations make advanced technology useful, usable, and
                 valuable at enterprise scale. My work focuses on turning complex
@@ -319,7 +313,7 @@ export default function Home() {
               </p>
               <ul
                 className="hero-appear mt-6 space-y-3 text-base text-slate-300"
-                style={{ transitionDelay: "620ms" }}
+                style={{ transitionDelay: "500ms" }}
               >
                 {overviewBullets.map((item) => (
                   <li key={item} className="flex gap-3">
@@ -330,7 +324,7 @@ export default function Home() {
               </ul>
               <div
                 className="hero-appear mt-6 flex flex-wrap gap-4 text-xs font-mono uppercase tracking-[0.25em] text-slate-400"
-                style={{ transitionDelay: "760ms" }}
+                style={{ transitionDelay: "620ms" }}
               >
                 <a
                   href="https://www.linkedin.com/in/mattmcb"
