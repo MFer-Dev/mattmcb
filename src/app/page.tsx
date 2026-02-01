@@ -275,25 +275,22 @@ export default function Home() {
             >
               This is a working snapshot of how I lead, think, and deliver today.
             </p>
-            <div
-              className="hero-appear mt-6 max-w-[720px] border border-white/10 bg-white/[0.02] p-8"
-              style={{ transitionDelay: "200ms" }}
-            >
+            <div className="mt-6 max-w-[720px]">
               <h1
                 className="hero-appear text-4xl font-semibold leading-tight text-white sm:text-5xl"
-                style={{ transitionDelay: "280ms" }}
+                style={{ transitionDelay: "200ms" }}
               >
                 Matthew McBride
               </h1>
               <p
                 className="hero-appear mt-3 text-base font-semibold text-slate-200"
-                style={{ transitionDelay: "360ms" }}
+                style={{ transitionDelay: "280ms" }}
               >
                 Enterprise AI adoption and operating-model execution at global scale.
               </p>
               <p
                 className="hero-appear mt-5 text-base leading-7 text-slate-300"
-                style={{ transitionDelay: "440ms" }}
+                style={{ transitionDelay: "360ms" }}
               >
                 I help organizations make advanced technology useful, usable, and
                 valuable at enterprise scale. My work focuses on turning complex
@@ -302,44 +299,44 @@ export default function Home() {
               </p>
               <ul
                 className="hero-appear mt-6 space-y-3 text-base text-slate-300"
-                style={{ transitionDelay: "520ms" }}
+                style={{ transitionDelay: "440ms" }}
               >
-              {overviewBullets.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
-                  <span>{item}</span>
-                </li>
-              ))}
+                {overviewBullets.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-500" />
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
               <div
                 className="hero-appear mt-6 flex flex-wrap gap-4 text-xs font-mono uppercase tracking-[0.25em] text-slate-400"
-                style={{ transitionDelay: "600ms" }}
+                style={{ transitionDelay: "520ms" }}
               >
-              <a
-                href="https://www.linkedin.com/in/mattmcb"
-                target="_blank"
-                rel="noreferrer"
-                className="border-b border-white/20 pb-1 transition hover:border-white/60 hover:text-slate-200"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="mailto:matt@mattmcb.me"
-                className="border-b border-white/20 pb-1 transition hover:border-white/60 hover:text-slate-200"
-              >
-                Email
-              </a>
-              <a
-                href="#contact"
-                onClick={(event) => {
-                  event.preventDefault();
-                  handleNavigate("contact");
-                }}
-                className="border-b border-white/20 pb-1 transition hover:border-white/60 hover:text-slate-200"
-              >
-                Resume
-              </a>
-            </div>
+                <a
+                  href="https://www.linkedin.com/in/mattmcb"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="border-b border-white/20 pb-1 transition hover:border-white/60 hover:text-slate-200"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="mailto:matt@mattmcb.me"
+                  className="border-b border-white/20 pb-1 transition hover:border-white/60 hover:text-slate-200"
+                >
+                  Email
+                </a>
+                <a
+                  href="#contact"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    handleNavigate("contact");
+                  }}
+                  className="border-b border-white/20 pb-1 transition hover:border-white/60 hover:text-slate-200"
+                >
+                  Resume
+                </a>
+              </div>
             </div>
           </section>
 

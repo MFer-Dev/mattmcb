@@ -19,19 +19,12 @@ export default function SideNav({
       }`}
     >
       <div className="brand-appear pb-6">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-xs font-mono text-slate-200">
-            MM
-          </div>
-          <div>
-            <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-300">
-              MATTHEW MCBRIDE
-            </p>
-            <p className="mt-2 text-xs text-slate-500">
-              Strategy • Operating models • Delivery
-            </p>
-          </div>
-        </div>
+        <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-300">
+          MATTHEW MCBRIDE
+        </p>
+        <p className="mt-2 text-xs text-slate-500">
+          Strategy • Operating models • Delivery
+        </p>
       </div>
       <div className="border-t border-white/10 pt-6">
       <nav className="space-y-2">
