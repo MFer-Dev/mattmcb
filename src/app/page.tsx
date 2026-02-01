@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SideNav from "@/components/SideNav";
 import MobileNav from "@/components/MobileNav";
 import { sections } from "@/lib/sections";
@@ -137,12 +137,12 @@ const experience = [
 ];
 
 export default function Home() {
-  const [activeId, setActiveId] = useState<string>(
-    sections[0]?.id ?? "overview",
-  );
+  const [activeId, setActiveId] = useState<string>("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const openingRef = useRef<HTMLDivElement | null>(null);
+  const openingEndRef = useRef(0);
 
   const handleNavigate = useCallback((id: string) => {
     const element = document.getElementById(id);
@@ -157,16 +157,29 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const updateOpeningEnd = () => {
+      if (!openingRef.current) return;
+      const rect = openingRef.current.getBoundingClientRect();
+      openingEndRef.current = rect.bottom + window.scrollY;
+    };
+
+    updateOpeningEnd();
+    window.addEventListener("resize", updateOpeningEnd);
+
     const targets = sections
       .map((section) => document.getElementById(section.id))
       .filter((section): section is HTMLElement => Boolean(section));
 
     if (targets.length === 0) {
+      window.removeEventListener("resize", updateOpeningEnd);
       return;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
+        if (window.scrollY < openingEndRef.current) {
+          return;
+        }
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id);
@@ -182,7 +195,10 @@ export default function Home() {
 
     targets.forEach((target) => observer.observe(target));
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateOpeningEnd);
+    };
   }, []);
 
   useEffect(() => {
@@ -247,6 +263,24 @@ export default function Home() {
               onNavigate={handleNavigate}
             />
           </div>
+
+          <section ref={openingRef} className="pb-12 pt-6">
+            <div className="max-w-[640px] space-y-5 text-base leading-7 text-slate-300">
+              <p>Hi. I’m Matthew.</p>
+              <p>
+                I’ve spent my career working in the space between ambition and
+                reality—where new technology meets real organizations, real
+                people, and real constraints.
+              </p>
+              <p>
+                My work is about turning complexity into something usable and
+                sustainable: shaping operating models, governance, and delivery
+                so advanced capability can actually take root and endure.
+              </p>
+            </div>
+          </section>
+
+          <div className="border-t border-white/10" />
 
           <section id="overview" className="scroll-mt-24 pb-14 pt-6">
             <p
