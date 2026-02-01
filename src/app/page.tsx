@@ -22,7 +22,9 @@ const approachBullets = [
 ];
 
 export default function Home() {
-  const [activeId, setActiveId] = useState(sections[0]?.id ?? "overview");
+  const [activeId, setActiveId] = useState<string>(
+    sections[0]?.id ?? "overview",
+  );
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavigate = useCallback((id: string) => {
