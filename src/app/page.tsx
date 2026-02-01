@@ -296,9 +296,9 @@ export default function Home() {
             >
               This is a working snapshot of how I lead, think, and deliver today.
             </p>
-            <div className="mt-6 max-w-[720px]">
+            <div className="mt-8 max-w-[720px]">
               <p
-                className="hero-appear text-2xl font-semibold text-white sm:text-3xl"
+                className="hero-appear text-xl font-medium text-slate-200 sm:text-2xl"
                 style={{ transitionDelay: "260ms" }}
               >
                 Enterprise AI adoption and operating-model execution at global scale.
