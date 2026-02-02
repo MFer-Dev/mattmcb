@@ -22,6 +22,9 @@ export const metadata: Metadata = {
       "Turning complex technology into usable, governed, and durable enterprise capability.",
     type: "website",
   },
+  alternates: {
+    canonical: "https://www.mattmcb.me",
+  },
   twitter: {
     card: "summary",
     title: "Matthew McBride — Enterprise AI Adoption & Operating Model Execution",
