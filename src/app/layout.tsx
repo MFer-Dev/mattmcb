@@ -13,26 +13,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Matthew McBride — Enterprise AI Adoption & Execution",
+  metadataBase: new URL("https://www.mattmcb.me"),
+  title: {
+    default: "Matthew McBride",
+    template: "%s  |  Matthew McBride",
+  },
   description:
-    "Digital services executive focused on enterprise AI adoption, operating models, and execution at global scale.",
-  openGraph: {
-    title: "Matthew McBride — Enterprise AI Adoption & Operating Model Execution",
-    description:
-      "Turning complex technology into usable, governed, and durable enterprise capability.",
-    type: "website",
-  },
+    "Enterprise digital services executive focused on making technology useful, usable, and valuable at scale.",
   alternates: {
-    canonical: "https://www.mattmcb.me",
-  },
-  twitter: {
-    card: "summary",
-    title: "Matthew McBride — Enterprise AI Adoption & Operating Model Execution",
-    description:
-      "Turning complex technology into usable, governed, and durable enterprise capability.",
-  },
-  icons: {
-    icon: "/577278.png",
+    canonical: new URL("https://www.mattmcb.me/"),
   },
 };
 
