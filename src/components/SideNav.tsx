@@ -19,11 +19,14 @@ export default function SideNav({
       }`}
     >
       <div className="brand-appear pb-6">
-        <p className="text-xs font-mono uppercase tracking-[0.3em] text-slate-400 opacity-70">
-          MATTHEW MCBRIDE
+        <p className="text-base font-semibold tracking-tight text-slate-100">
+          Matthew McBride
         </p>
-        <p className="mt-2 text-xs text-slate-500 opacity-70">
-          Strategy • Operating models • Delivery
+        <p className="mt-2 text-[11px] font-mono uppercase tracking-[0.18em] text-slate-500">
+          Enterprise AI &amp; Transformation Executive
+        </p>
+        <p className="mt-3 text-xs text-slate-500">
+          Strategy • Design • Execution
         </p>
       </div>
       <div className="border-t border-white/10 pt-8">

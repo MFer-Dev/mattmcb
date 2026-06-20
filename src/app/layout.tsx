@@ -15,13 +15,49 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.mattmcb.me"),
   title: {
-    default: "Matthew McBride",
+    default: "Matthew McBride — Enterprise AI & Transformation Executive",
     template: "%s  |  Matthew McBride",
   },
   description:
-    "Enterprise digital services executive focused on making technology useful, usable, and valuable at scale.",
+    "Matthew McBride is an enterprise AI and transformation executive helping large organizations turn AI into operating reality and build toward the autonomous enterprise — keeping AI in service of the human experience.",
+  keywords: [
+    "Matthew McBride",
+    "Matt McBride",
+    "Enterprise AI",
+    "Autonomous enterprise",
+    "Chief Digital Officer",
+    "Chief Transformation Officer",
+    "Chief Technology Officer",
+    "Chief Experience Officer",
+    "Digital transformation",
+    "AI strategy",
+  ],
+  authors: [{ name: "Matthew McBride" }],
   alternates: {
     canonical: new URL("https://www.mattmcb.me/"),
+  },
+  openGraph: {
+    type: "website",
+    url: "https://www.mattmcb.me/",
+    siteName: "Matthew McBride",
+    title: "Matthew McBride — Enterprise AI & Transformation Executive",
+    description:
+      "Helping large enterprises turn AI into operating reality and build toward the autonomous enterprise.",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Matthew McBride — Enterprise AI & Transformation Executive",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Matthew McBride — Enterprise AI & Transformation Executive",
+    description:
+      "Helping large enterprises turn AI into operating reality and build toward the autonomous enterprise.",
+    images: ["/og.png"],
   },
 };
 

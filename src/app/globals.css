@@ -2,6 +2,9 @@
 
 :root {
   color-scheme: dark;
+  /* Single restrained signal accent used sparingly across the site. */
+  --accent: #5fc6d6;
+  --accent-strong: #7fd6e3;
 }
 
 html {
@@ -119,5 +122,69 @@ body::after {
   [data-mounted="true"] .hero-appear,
   [data-mounted="true"] .brand-appear {
     transition: none;
+  }
+}
+
+/* --- Polish helpers ------------------------------------------------------ */
+
+/* Eyebrow / section kicker label */
+.eyebrow {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Thin lead-in rule next to the accent eyebrow */
+.eyebrow-rule::before {
+  content: "";
+  display: inline-block;
+  width: 26px;
+  height: 1px;
+  margin-right: 14px;
+  vertical-align: middle;
+  background: var(--accent);
+  opacity: 0.7;
+}
+
+/* Accent gradient for the hero headline keyword */
+.accent-text {
+  color: var(--accent-strong);
+}
+
+/* Subtle hover lift used on cards */
+.lift {
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 320ms ease,
+    background-color 320ms ease;
+}
+.lift:hover {
+  transform: translateY(-2px);
+  border-color: rgba(95, 198, 214, 0.4);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Brand / logo wall wordmarks */
+.brandmark {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.45);
+  transition:
+    color 280ms ease,
+    opacity 280ms ease;
+}
+.brandmark:hover {
+  color: rgba(226, 232, 240, 0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lift {
+    transition: none;
+  }
+  .lift:hover {
+    transform: none;
   }
 }
