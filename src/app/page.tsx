@@ -437,6 +437,12 @@ export default function Home() {
               across retail, life sciences, financial services, energy, and
               hi-tech.
             </p>
+            <p className="mt-4 max-w-[760px] text-sm leading-6 text-slate-400">
+              The team blends homegrown international talent with senior hires
+              from the best of the design and consulting world — frog design,
+              AKQA, FCB Global, IBM, Accenture, Deloitte, McKinsey, and PwC among
+              many others.
+            </p>
           </section>
 
           {/* Brand wall */}
