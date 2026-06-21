@@ -42,6 +42,14 @@ const metrics: { value: string; label: string; small?: boolean }[] = [
   { value: "Fortune 100", label: "Enterprise clients", small: true },
 ];
 
+const arc = [
+  { i: "01", label: "Human behavior", sub: "Psychology & cognition" },
+  { i: "02", label: "Design & experience", sub: "Craft to product" },
+  { i: "03", label: "Business & consulting", sub: "Delivery & advisory" },
+  { i: "04", label: "Enterprise strategy", sub: "Operating models" },
+  { i: "05", label: "AI & the autonomous enterprise", sub: "What’s next" },
+];
+
 const focusPillars = [
   {
     title: "Enterprise AI strategy",
@@ -567,7 +575,66 @@ export default function Home() {
             <h2 className="mt-3 text-2xl font-semibold text-white">
               Experience
             </h2>
-            <div className="mt-6 space-y-10">
+
+            <p className="mt-4 max-w-[680px] text-sm leading-6 text-slate-400">
+              A throughline from human behavior to enterprise AI — I’ve led at
+              every layer, not just the top.
+            </p>
+
+            {/* Career arc — desktop */}
+            <div className="mt-8 hidden sm:flex">
+              {arc.map((s, i) => (
+                <div key={s.label} className="flex-1">
+                  <div className="flex items-center">
+                    <span
+                      className="h-2.5 w-2.5 shrink-0 rounded-full"
+                      style={{ backgroundColor: "var(--accent)" }}
+                    />
+                    {i < arc.length - 1 && (
+                      <span
+                        className="h-px flex-1"
+                        style={{ backgroundColor: "rgba(95,198,214,0.3)" }}
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
+                  <p className="mt-3 text-[10px] font-mono uppercase tracking-[0.25em] text-slate-500">
+                    {s.i}
+                  </p>
+                  <p className="mt-2 pr-4 text-sm font-semibold text-slate-100">
+                    {s.label}
+                  </p>
+                  <p className="mt-1 pr-4 text-xs text-slate-500">{s.sub}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Career arc — mobile */}
+            <div className="mt-8 space-y-4 sm:hidden">
+              {arc.map((s) => (
+                <div key={s.label} className="flex items-center gap-3">
+                  <span
+                    className="h-2 w-2 shrink-0 rounded-full"
+                    style={{ backgroundColor: "var(--accent)" }}
+                  />
+                  <div>
+                    <p className="text-sm font-semibold text-slate-100">
+                      {s.label}
+                    </p>
+                    <p className="text-xs text-slate-500">{s.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p
+              className="mt-6 text-xs font-mono uppercase tracking-[0.25em]"
+              style={{ color: "var(--accent)" }}
+            >
+              Always in service of the human experience
+            </p>
+
+            <div className="mt-12 space-y-10">
               {experience.map((item) => (
                 <div key={item.title} className="border-t border-white/10 pt-6">
                   <h3 className="text-lg font-semibold text-white">
