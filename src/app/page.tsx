@@ -102,7 +102,7 @@ const experience = [
       {
         label: "Scope",
         value:
-          "Global Digital Strategy & Innovation organization operating across industries, geographies, and delivery segments.",
+          "A matrixed global Digital Strategy & Innovation organization whose capabilities deploy across the full project lifecycle — pre-sales, strategy, solution, and delivery — spanning industries and geographies.",
       },
       {
         label: "Accountability",
@@ -531,6 +531,12 @@ export default function Home() {
               autonomous enterprise where AI agents and people work as one system.
               The throughline is human: even as we design for agent experience,
               the work exists to improve the human experience, not replace it.
+            </p>
+            <p className="mt-4 max-w-[680px] text-base leading-7 text-slate-300">
+              And I’m running it inside my own organization first — rebuilding
+              each practice AI-first, from AI-augmented design and business
+              analysis to product management and consulting. The autonomous
+              enterprise isn’t a thesis I advise on; it’s one I’m operating.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {focusPillars.map((pillar) => (
