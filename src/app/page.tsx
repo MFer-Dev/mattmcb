@@ -189,6 +189,7 @@ const credentials = [
   "Prosci Certified Change Practitioner",
   "MicroMasters, Business Leadership — University of Queensland",
   "MFA — Academy of Art University",
+  "B.A., Psychology & Biology — Rhodes College",
 ];
 
 const speakingTopics = [
@@ -366,8 +367,8 @@ export default function Home() {
               className="hero-appear mt-4 max-w-[780px] text-3xl font-semibold leading-tight tracking-tight text-white sm:text-[2.6rem] sm:leading-[1.12]"
               style={{ transitionDelay: "240ms" }}
             >
-              I help large enterprises turn AI into operating reality — and build
-              toward the <span className="accent-text">autonomous enterprise</span>.
+              I Help Large Enterprises Turn AI Into Operating Reality — And Build
+              Toward The <span className="accent-text">Autonomous Enterprise</span>.
             </h1>
             <p
               className="hero-appear mt-7 max-w-[660px] text-base leading-7 text-slate-300"
@@ -461,7 +462,7 @@ export default function Home() {
           <section id="overview" className="scroll-mt-24 border-t border-white/10 py-12">
             <p className="eyebrow">Snapshot</p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
-              Enterprise AI in service of the human experience
+              Enterprise AI In Service Of The Human Experience
             </h2>
             <p className="mt-5 text-base leading-7 text-slate-300">
               I help enterprises adopt AI through a cohesive strategy — one with
@@ -494,7 +495,7 @@ export default function Home() {
           <section id="focus" className="scroll-mt-24 border-t border-white/10 py-12">
             <p className="eyebrow">The mandate</p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
-              Enterprise AI &amp; the autonomous enterprise
+              Enterprise AI &amp; The Autonomous Enterprise
             </h2>
             <p className="mt-4 max-w-[680px] text-base leading-7 text-slate-300">
               I’m leading a refocus of my organization around enterprise AI —
@@ -523,7 +524,7 @@ export default function Home() {
           {/* Method */}
           <section id="method" className="scroll-mt-24 border-t border-white/10 py-12">
             <p className="eyebrow">Method</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">How I work</h2>
+            <h2 className="mt-3 text-2xl font-semibold text-white">How I Work</h2>
             <div className="mt-6 space-y-6">
               {howIWork.map((item) => (
                 <div
@@ -587,7 +588,7 @@ export default function Home() {
           >
             <p className="eyebrow">Credibility</p>
             <h2 className="mt-3 text-2xl font-semibold text-white">
-              Credentials &amp; recognition
+              Credentials &amp; Recognition
             </h2>
             <div className="mt-8 grid gap-8 sm:grid-cols-2">
               <div>
