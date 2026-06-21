@@ -193,10 +193,10 @@ const experience = [
 const credentials = [
   "MBA — International University Isabel I de Castilla",
   "M.S., Artificial Intelligence for Business — Escuela de Negocios Europea de Barcelona",
-  "Prosci Certified Change Practitioner",
-  "MicroMasters, Business Leadership — University of Queensland",
   "MFA — Academy of Art University",
   "B.A., Psychology & Biology — Rhodes College",
+  "MicroMasters, Business Leadership — University of Queensland",
+  "Prosci Certified Change Practitioner",
 ];
 
 const speakingTopics = [
