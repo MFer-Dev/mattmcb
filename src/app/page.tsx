@@ -181,6 +181,13 @@ const experience = [
       },
     ],
   },
+  {
+    title: "Earlier — Creative & Design Leadership",
+    dates: "2004–2015",
+    framing:
+      "Before IBM and SoftServe, I came up through agencies and brands — Associate Creative Director at FCB Global (Fortune 500 financial services), Digital Design Director at Eyemart Express, and Design Director / Partner at SCDS Worldwide — building the craft and execution foundation the later design, strategy, and transformation work is built on.",
+    modules: [],
+  },
 ];
 
 const credentials = [
@@ -314,6 +321,13 @@ export default function Home() {
         />
       </div>
 
+      <MobileNav
+        activeId={activeId}
+        isOpen={isMenuOpen}
+        onToggle={setIsMenuOpen}
+        onNavigate={handleNavigate}
+      />
+
       <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-10 px-6 pb-16 pt-12 lg:grid-cols-[240px_minmax(0,860px)_260px]">
         <SideNav
           activeId={activeId}
@@ -322,15 +336,6 @@ export default function Home() {
         />
 
         <div className="w-full enter enter-main pt-16 md:pt-12 lg:pt-0">
-          <div className="flex items-center justify-between md:hidden">
-            <MobileNav
-              activeId={activeId}
-              isOpen={isMenuOpen}
-              onToggle={setIsMenuOpen}
-              onNavigate={handleNavigate}
-            />
-          </div>
-
           {/* Hero */}
           <section ref={openingRef} className="pb-14 pt-6">
             <div

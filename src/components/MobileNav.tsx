@@ -18,7 +18,7 @@ export default function MobileNav({
       <button
         type="button"
         onClick={() => onToggle(!isOpen)}
-        className="fixed right-4 top-4 z-[70] inline-flex h-10 w-10 items-center justify-center text-slate-200 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+        className="fixed right-4 top-4 z-[70] inline-flex h-12 w-12 items-center justify-center rounded-lg border border-white/15 bg-[#0b0c0f]/80 text-slate-100 shadow-lg backdrop-blur transition hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-label={isOpen ? "Close navigation" : "Open navigation"}
@@ -29,10 +29,10 @@ export default function MobileNav({
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
-          className="h-4 w-4 text-slate-200"
+          className="h-6 w-6 text-current"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.5"
+          strokeWidth="1.75"
           strokeLinecap="round"
         >
           {isOpen ? (
