@@ -200,9 +200,22 @@ const credentials = [
 ];
 
 const speakingTopics = [
-  "Perception Design — Shaping the Future of Reality",
-  "The Paradoxical Nature of AI and Digital Well-Being",
-  "Culture Change with DesignOps at Scale",
+  {
+    title: "The Paradoxical Nature of AI as the Key to our Digital Well-Being",
+    venue: "IT Arena 2019, Lviv",
+  },
+  {
+    title: "Perception Design: Shaping the Future of Reality",
+    venue: "IT Weekend Ukraine 2017, Kyiv",
+  },
+  {
+    title: "Culture Change with DesignOps at Scale",
+    venue: "Iteracia by Projector",
+  },
+  {
+    title: "Bluemix Design System (now IBM Carbon)",
+    venue: "IBM InterConnect 2016, Las Vegas",
+  },
 ];
 
 export default function Home() {
@@ -624,13 +637,25 @@ export default function Home() {
                   </p>
                   <p className="mt-4 text-sm leading-6 text-slate-300">
                     Internationally recognized keynote speaker on AI, design, and
-                    the future of work — at events including IT Arena and IT
-                    Weekend. Selected talks:
+                    the future of work — at events including IBM InterConnect, IT
+                    Arena, and IT Weekend. Selected talks:
                   </p>
                   <ul className="mt-3 space-y-2 text-sm text-slate-400">
-                    {speakingTopics.map((topic) => (
-                      <li key={topic}>{topic}</li>
+                    {speakingTopics.map((talk) => (
+                      <li key={talk.title}>
+                        <span className="text-slate-300">{talk.title}</span>
+                        <span className="text-slate-500"> — {talk.venue}</span>
+                      </li>
                     ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-500">
+                    Teaching
+                  </p>
+                  <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                    <li>Adjunct Professor — Academy of Art University</li>
+                    <li>Instructor — Chicago Portfolio School</li>
                   </ul>
                 </div>
                 <div>
