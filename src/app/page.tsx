@@ -191,8 +191,8 @@ const experience = [
 ];
 
 const credentials = [
-  "MBA — Universidad Isabel I",
-  "M.S., Artificial Intelligence for Business — ENEB",
+  "MBA — International University Isabel I de Castilla",
+  "M.S., Artificial Intelligence for Business — Escuela de Negocios Europea de Barcelona",
   "Prosci Certified Change Practitioner",
   "MicroMasters, Business Leadership — University of Queensland",
   "MFA — Academy of Art University",
