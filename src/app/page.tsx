@@ -9,6 +9,7 @@ const snapshotBullets = [
   "Operate at the C-1 level, partnering with CTO and CDO organizations on AI strategy, delivery performance, operational risk, and capability.",
   "Lead at every layer — strategy, design, and execution — having come up through delivery and design before strategy.",
   "Design for both human and agent experience, keeping AI in service of the people it affects.",
+  "Oversee enterprise architecture across the group — tying business value to technology decisions across the enterprise.",
   "Lead globally distributed teams across 20+ countries — hybrid, on-site, and remote delivery.",
   "Step directly into high-stakes programs when complexity is high and failure isn’t an option.",
 ];
@@ -111,7 +112,7 @@ const experience = [
       {
         label: "Operating Model",
         value:
-          "Everything but pure technology — design and experience, business analysis, product management, consulting, digital strategy, change management, and transformation program management (governance).",
+          "Everything but pure technology — design and experience, business analysis, product management, consulting, digital strategy, enterprise architecture, change management, and transformation program management (governance).",
       },
       {
         label: "Delivery Reality",
@@ -458,8 +459,9 @@ export default function Home() {
             <p className="mt-6 max-w-[760px] text-sm leading-6 text-slate-400">
               What began as a sub-20-person design team, I now lead as a
               ~500-person global organization — design and experience, business
-              analysis, product management, consulting, digital strategy, change
-              management, and transformation governance. Effectively everything
+              analysis, product management, consulting, digital strategy,
+              enterprise architecture, change management, and transformation
+              governance. Effectively everything
               but pure technology inside a full-service digital services firm,
               across retail, life sciences, financial services, energy, and
               hi-tech.
