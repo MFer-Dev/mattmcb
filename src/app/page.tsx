@@ -112,7 +112,7 @@ const experience = [
       {
         label: "Operating Model",
         value:
-          "Everything but pure technology — design and experience, business analysis, product management, consulting, digital strategy, enterprise architecture, change management, and transformation program management (governance).",
+          "Everything but pure technology — design and experience, business analysis, product management, consulting, value realization, digital strategy, enterprise architecture, change management, and transformation program management (governance).",
       },
       {
         label: "Delivery Reality",
@@ -459,9 +459,9 @@ export default function Home() {
             <p className="mt-6 max-w-[760px] text-sm leading-6 text-slate-400">
               What began as a sub-20-person design team, I now lead as a
               ~500-person global organization — design and experience, business
-              analysis, product management, consulting, digital strategy,
-              enterprise architecture, change management, and transformation
-              governance. Effectively everything
+              analysis, product management, consulting, value realization,
+              digital strategy, enterprise architecture, change management, and
+              transformation governance. Effectively everything
               but pure technology inside a full-service digital services firm,
               across retail, life sciences, financial services, energy, and
               hi-tech.
@@ -501,8 +501,8 @@ export default function Home() {
               operated to create durable value.
             </p>
             <p className="mt-4 text-base leading-7 text-slate-300">
-              And I keep the work pointed at people. Even as we begin designing
-              for agent experience, we don’t abandon the human one — the goal is
+              And I keep the work pointed at people. We already design for agent
+              experience — without abandoning the human one — because the goal is
               AI that makes organizations, and the people inside them, measurably
               better.
             </p>
