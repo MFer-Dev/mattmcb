@@ -1,8 +1,10 @@
 export const sections = [
-  { id: "overview", label: "SNAPSHOT" },
-  { id: "focus", label: "FOCUS" },
-  { id: "method", label: "METHOD" },
-  { id: "impact", label: "IMPACT" },
-  { id: "credentials", label: "CREDENTIALS" },
-  { id: "contact", label: "CONNECT" },
+  { id: "snapshot", question: "The short version." },
+  { id: "focus", question: "The mandate." },
+  { id: "method", question: "How I work." },
+  { id: "impact", question: "The track record." },
+  { id: "credentials", question: "The foundation." },
+  { id: "contact", question: "Let’s talk." },
 ] as const;
+
+export type SectionId = (typeof sections)[number]["id"];

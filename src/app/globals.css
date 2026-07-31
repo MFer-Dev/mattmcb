@@ -2,9 +2,15 @@
 
 :root {
   color-scheme: dark;
-  /* Single restrained signal accent used sparingly across the site. */
-  --accent: #5fc6d6;
-  --accent-strong: #7fd6e3;
+  /* Ink-and-paper monochrome system, inverted. Typography is the design. */
+  --paper: #121210;
+  --ink: #f4f2ec;
+  --ink-soft: #d9d6cd;
+  --ink-muted: #a3a099;
+  --ink-faint: #7c7973;
+  --hairline: rgba(244, 242, 236, 0.16);
+  --accent: #f4f2ec;
+  --accent-strong: #f4f2ec;
 }
 
 html {
@@ -18,173 +24,53 @@ html {
 }
 
 body {
-  background: #0b0c0f;
-  color: #e2e8f0;
+  background: var(--paper);
+  color: var(--ink-soft);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 420px;
-  height: 420px;
-  background-image: url("/top-right.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: top right;
-  opacity: 0.08;
-  -webkit-mask-image: linear-gradient(to bottom left, rgba(0, 0, 0, 0.9), transparent);
-  mask-image: linear-gradient(to bottom left, rgba(0, 0, 0, 0.9), transparent);
-  pointer-events: none;
-  z-index: 0;
+/* --- Page transitions --------------------------------------------------- */
+
+.page-enter {
+  animation: pageIn 480ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 420px;
-  height: 420px;
-  background-image: url("/btm-left.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: bottom left;
-  opacity: 0.08;
-  -webkit-mask-image: linear-gradient(to top right, rgba(0, 0, 0, 0.9), transparent);
-  mask-image: linear-gradient(to top right, rgba(0, 0, 0, 0.9), transparent);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.top-fade {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 64px;
-  background: linear-gradient(
-    to bottom,
-    rgba(11, 12, 15, 0.92),
-    rgba(11, 12, 15, 0)
-  );
-  pointer-events: none;
-  z-index: 60;
-}
-
-[data-mounted="false"] .enter {
-  opacity: 0;
-  transform: translateY(16px);
-}
-
-[data-mounted="true"] .enter {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-[data-mounted="true"] .enter-nav {
-  transition-delay: 80ms;
-}
-
-[data-mounted="true"] .enter-main {
-  transition-delay: 180ms;
-}
-
-[data-mounted="false"] .hero-appear,
-[data-mounted="false"] .brand-appear {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-[data-mounted="true"] .hero-appear,
-[data-mounted="true"] .brand-appear {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-mounted="false"] .enter,
-  [data-mounted="false"] .hero-appear,
-  [data-mounted="false"] .brand-appear {
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
     opacity: 1;
     transform: none;
   }
+}
 
-  [data-mounted="true"] .enter,
-  [data-mounted="true"] .hero-appear,
-  [data-mounted="true"] .brand-appear {
-    transition: none;
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
   }
 }
 
-/* --- Polish helpers ------------------------------------------------------ */
+/* --- Recurring devices -------------------------------------------------- */
 
-/* Eyebrow / section kicker label */
+/* Small mono kicker label */
 .eyebrow {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 11px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--accent);
-}
-
-/* Thin lead-in rule next to the accent eyebrow */
-.eyebrow-rule::before {
-  content: "";
-  display: inline-block;
-  width: 26px;
-  height: 1px;
-  margin-right: 14px;
-  vertical-align: middle;
-  background: var(--accent);
-  opacity: 0.7;
-}
-
-/* Accent gradient for the hero headline keyword */
-.accent-text {
-  color: var(--accent-strong);
-}
-
-/* Subtle hover lift used on cards */
-.lift {
-  transition:
-    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 320ms ease,
-    background-color 320ms ease;
-}
-.lift:hover {
-  transform: translateY(-2px);
-  border-color: rgba(95, 198, 214, 0.4);
-  background-color: rgba(255, 255, 255, 0.02);
+  color: var(--ink-faint);
 }
 
 /* Brand / logo wall wordmarks */
 .brandmark {
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(226, 232, 240, 0.45);
-  transition:
-    color 280ms ease,
-    opacity 280ms ease;
+  color: rgba(244, 242, 236, 0.45);
+  transition: color 280ms ease;
 }
 .brandmark:hover {
-  color: rgba(226, 232, 240, 0.95);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lift {
-    transition: none;
-  }
-  .lift:hover {
-    transform: none;
-  }
+  color: rgba(244, 242, 236, 0.95);
 }

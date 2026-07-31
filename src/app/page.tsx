@@ -1,17 +1,45 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import SideNav from "@/components/SideNav";
-import MobileNav from "@/components/MobileNav";
-import { sections } from "@/lib/sections";
+import { useCallback, useEffect, useState } from "react";
+import { sections, type SectionId } from "@/lib/sections";
 
-const snapshotBullets = [
-  "Operate at the C-1 level, partnering with CTO and CDO organizations on AI strategy, delivery performance, operational risk, and capability.",
-  "Lead at every layer — strategy, design, and execution — having come up through delivery and design before strategy.",
-  "Design for both human and agent experience, keeping AI in service of the people it affects.",
-  "Oversee enterprise architecture across the group — tying business value to technology decisions across the enterprise.",
-  "Lead globally distributed teams across 20+ countries — hybrid, on-site, and remote delivery.",
-  "Step directly into high-stakes programs when complexity is high and failure isn’t an option.",
+type PageId = "home" | SectionId;
+
+const allPages: { id: PageId; question: string }[] = [
+  { id: "home", question: "Home." },
+  ...sections,
+];
+
+const snapshotRows = [
+  {
+    title: "Operates at C-1",
+    detail:
+      "Partnering with CTO and CDO organizations on AI strategy, delivery performance, operational risk, and capability.",
+  },
+  {
+    title: "Leads at every layer",
+    detail:
+      "Strategy, design, and execution — having come up through delivery and design before strategy.",
+  },
+  {
+    title: "Designs for humans and agents",
+    detail:
+      "Keeping AI in service of the people it affects — agent experience without abandoning the human one.",
+  },
+  {
+    title: "Owns enterprise architecture",
+    detail:
+      "Tying business value to technology decisions across the entire group.",
+  },
+  {
+    title: "Runs globally distributed teams",
+    detail: "20+ countries — hybrid, on-site, and remote delivery.",
+  },
+  {
+    title: "Steps into the hard ones",
+    detail:
+      "High-stakes programs where complexity is high and failure isn’t an option.",
+  },
 ];
 
 const brands = [
@@ -36,11 +64,11 @@ const brands = [
   "Dairy Queen",
 ];
 
-const metrics: { value: string; label: string; small?: boolean }[] = [
+const metrics = [
   { value: "500+", label: "Practitioners led" },
   { value: "20+", label: "Countries" },
   { value: "2,500+", label: "Programs delivered" },
-  { value: "Fortune 100", label: "Enterprise clients", small: true },
+  { value: "Fortune 100", label: "Enterprise clients" },
 ];
 
 const arc = [
@@ -227,566 +255,643 @@ const speakingTopics = [
   },
 ];
 
+/* --- Shared building blocks --------------------------------------------- */
+
+function QuestionHeadline({ children }: { children: React.ReactNode }) {
+  return (
+    <h1 className="pt-14 text-[clamp(3rem,10vw,6.5rem)] font-bold leading-[0.98] tracking-[-0.04em] text-[#f4f2ec] sm:pt-20">
+      {children}
+    </h1>
+  );
+}
+
+function Statement({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-[#f4f2ec] sm:text-5xl">
+      {children}
+    </p>
+  );
+}
+
+function Rule() {
+  return <div className="border-t border-white/15" />;
+}
+
 export default function Home() {
-  const [activeId, setActiveId] = useState<string>("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [mounted, setMounted] = useState(false);
-  const [photoOk, setPhotoOk] = useState(true);
-  const openingRef = useRef<HTMLDivElement | null>(null);
-  const openingEndRef = useRef(0);
-
-  const handleNavigate = useCallback((id: string) => {
-    const element = document.getElementById(id);
-    if (!element) return;
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    element.scrollIntoView({
-      behavior: prefersReducedMotion ? "auto" : "smooth",
-      block: "start",
-    });
-  }, []);
+  const [page, setPage] = useState<PageId>("home");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hoverPage, setHoverPage] = useState<PageId | null>(null);
 
   useEffect(() => {
-    const updateOpeningEnd = () => {
-      if (!openingRef.current) return;
-      const rect = openingRef.current.getBoundingClientRect();
-      openingEndRef.current = rect.bottom + window.scrollY;
+    if (!menuOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
     };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
 
-    updateOpeningEnd();
-    window.addEventListener("resize", updateOpeningEnd);
+  useEffect(() => {
+    const apply = () => {
+      const hash = window.location.hash.replace("#", "");
+      setPage(
+        sections.some((section) => section.id === hash)
+          ? (hash as SectionId)
+          : "home",
+      );
+      window.scrollTo(0, 0);
+    };
+    apply();
+    window.addEventListener("hashchange", apply);
+    return () => window.removeEventListener("hashchange", apply);
+  }, []);
 
-    const targets = sections
-      .map((section) => document.getElementById(section.id))
-      .filter((section): section is HTMLElement => Boolean(section));
-
-    if (targets.length === 0) {
-      window.removeEventListener("resize", updateOpeningEnd);
-      return;
+  const navigate = useCallback((id: PageId) => {
+    setMenuOpen(false);
+    if (id === "home") {
+      history.pushState(
+        null,
+        "",
+        window.location.pathname + window.location.search,
+      );
+      setPage("home");
+      window.scrollTo(0, 0);
+    } else {
+      window.location.hash = id;
     }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (window.scrollY < openingEndRef.current) {
-          return;
-        }
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: "-30% 0px -60% 0px",
-        threshold: 0,
-      },
-    );
-
-    targets.forEach((target) => observer.observe(target));
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", updateOpeningEnd);
-    };
   }, []);
 
-  useEffect(() => {
-    let ticking = false;
-
-    const update = () => {
-      const { scrollTop, scrollHeight, clientHeight } =
-        document.documentElement;
-      const maxScroll = scrollHeight - clientHeight;
-      setScrollProgress(maxScroll > 0 ? scrollTop / maxScroll : 0);
-    };
-
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(() => {
-        update();
-        ticking = false;
-      });
-    };
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    const id = window.requestAnimationFrame(() => setMounted(true));
-    return () => window.cancelAnimationFrame(id);
-  }, []);
+  const pageIndex =
+    page === "home" ? -1 : sections.findIndex((s) => s.id === page);
+  const prev: PageId | null =
+    pageIndex === -1 ? null : pageIndex === 0 ? "home" : sections[pageIndex - 1].id;
+  const next: PageId | null =
+    pageIndex === -1 || pageIndex === sections.length - 1
+      ? null
+      : sections[pageIndex + 1].id;
 
   return (
-    <div
-      className="min-h-screen bg-[#0b0c0f] text-slate-100"
-      data-mounted={mounted ? "true" : "false"}
-    >
-      <div className="top-fade" aria-hidden="true" />
-      <div className="fixed left-0 top-0 z-50 h-[2px] w-full bg-white/5">
-        <div
-          className="h-full"
-          style={{
-            width: `${Math.round(scrollProgress * 100)}%`,
-            backgroundColor: "var(--accent)",
-          }}
-        />
-      </div>
-
-      <MobileNav
-        activeId={activeId}
-        isOpen={isMenuOpen}
-        onToggle={setIsMenuOpen}
-        onNavigate={handleNavigate}
-      />
-
-      <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-10 px-6 pb-16 pt-12 lg:grid-cols-[240px_minmax(0,860px)_260px]">
-        <SideNav
-          activeId={activeId}
-          onNavigate={handleNavigate}
-          className="enter enter-nav"
-        />
-
-        <div className="w-full enter enter-main pt-16 md:pt-12 lg:pt-0">
-          {/* Hero */}
-          <section ref={openingRef} className="pb-14 pt-6">
-            <div
-              className="hero-appear mb-8 h-20 w-20 overflow-hidden rounded-full border border-white/15"
-              style={{ transitionDelay: "20ms" }}
+    <div className="min-h-screen bg-[#121210] text-[#f4f2ec]">
+      <div className="mx-auto flex min-h-screen w-full max-w-[1360px] flex-col px-6 sm:px-10">
+        {/* Top bar — name left, page circles right */}
+        <header className="flex items-center justify-between gap-4 pt-6 sm:pt-8">
+          <button
+            type="button"
+            onClick={() => navigate("home")}
+            className="text-left text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:text-base"
+          >
+            <span className="font-semibold tracking-tight text-[#f4f2ec]">
+              Matthew McBride
+            </span>
+            <span className="hidden text-[#7c7973] md:inline">
+              {" "}
+              · Enterprise AI &amp; Transformation Executive
+            </span>
+          </button>
+          {/* Desktop — horizontal page indicator */}
+          <div className="hidden items-center gap-5 md:flex">
+            <span
+              aria-hidden="true"
+              className="w-[200px] truncate text-right font-mono text-[10px] uppercase tracking-[0.25em] text-[#7c7973]"
             >
-              {photoOk ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src="/matt.jpg"
-                  alt="Matthew McBride"
-                  className="h-full w-full object-cover grayscale"
-                  onError={() => setPhotoOk(false)}
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center bg-white/5 text-base font-semibold tracking-wide text-slate-300">
-                  MM
-                </div>
-              )}
-            </div>
-            <p
-              className="hero-appear eyebrow eyebrow-rule"
-              style={{ transitionDelay: "60ms" }}
-            >
-              Enterprise AI &amp; Transformation
-            </p>
-            <p
-              className="hero-appear mt-7 text-base text-slate-400"
-              style={{ transitionDelay: "140ms" }}
-            >
-              Hi, I’m Matthew.
-            </p>
-            <h1
-              className="hero-appear mt-4 max-w-[780px] text-3xl font-semibold leading-tight tracking-tight text-white sm:text-[2.6rem] sm:leading-[1.12]"
-              style={{ transitionDelay: "240ms" }}
-            >
-              I Help Large Enterprises Turn AI Into Operating Reality — And Build
-              Toward The <span className="accent-text">Autonomous Enterprise</span>.
-            </h1>
-            <p
-              className="hero-appear mt-7 max-w-[660px] text-base leading-7 text-slate-300"
-              style={{ transitionDelay: "360ms" }}
-            >
-              I make technology useful, usable, and valuable for organizations
-              operating at scale. My work focuses on shaping the right solutions
-              first — then making sure they can be executed, governed, and adopted
-              in real operating environments, where success depends as much on
-              judgment and execution as on the technology itself.
-            </p>
-            <div
-              className="hero-appear mt-8 flex flex-wrap gap-5 text-xs font-mono uppercase tracking-[0.25em] text-slate-400"
-              style={{ transitionDelay: "460ms" }}
-            >
-              <a
-                href="https://www.linkedin.com/in/mattmcb"
-                target="_blank"
-                rel="noreferrer"
-                className="border-b border-white/20 pb-1 transition hover:border-[color:var(--accent)] hover:text-slate-100"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="mailto:matt@mattmcb.me"
-                className="border-b border-white/20 pb-1 transition hover:border-[color:var(--accent)] hover:text-slate-100"
-              >
-                Email
-              </a>
-              <a
-                href="#contact"
-                onClick={(event) => {
-                  event.preventDefault();
-                  handleNavigate("contact");
-                }}
-                className="border-b border-white/20 pb-1 transition hover:border-[color:var(--accent)] hover:text-slate-100"
-              >
-                Résumé
-              </a>
-            </div>
-          </section>
-
-          {/* Scale */}
-          <section className="border-t border-white/10 py-10">
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-              {metrics.map((m) => (
-                <div key={m.label}>
-                  <p
-                    className={`${
-                      m.small ? "text-2xl sm:text-3xl" : "text-3xl sm:text-4xl"
-                    } whitespace-nowrap font-semibold leading-tight text-white`}
-                  >
-                    {m.value}
-                  </p>
-                  <p className="mt-2 text-[11px] font-mono uppercase tracking-[0.2em] text-slate-500">
-                    {m.label}
-                  </p>
-                </div>
+              {allPages.find((p) => p.id === (hoverPage ?? page))?.question}
+            </span>
+            <nav className="flex items-center gap-2" aria-label="Pages">
+              {allPages.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => navigate(item.id)}
+                  onMouseEnter={() => setHoverPage(item.id)}
+                  onMouseLeave={() => setHoverPage(null)}
+                  onFocus={() => setHoverPage(item.id)}
+                  onBlur={() => setHoverPage(null)}
+                  aria-label={item.question}
+                  aria-current={page === item.id ? "page" : undefined}
+                  className="group flex h-8 items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                >
+                  <span
+                    className={`h-[3px] rounded-full transition-all duration-300 ${
+                      page === item.id
+                        ? "w-12 bg-[#f4f2ec]"
+                        : "w-7 bg-white/25 group-hover:bg-white/70"
+                    }`}
+                  />
+                </button>
               ))}
-            </div>
-            <p className="mt-6 max-w-[760px] text-sm leading-6 text-slate-400">
-              What began as a sub-20-person design team, I now lead as a
-              ~500-person global organization — design and experience, business
-              analysis, product management, consulting, value realization,
-              digital strategy, enterprise architecture, change management, and
-              transformation governance. Effectively everything
-              but pure technology inside a full-service digital services firm,
-              across retail, life sciences, financial services, energy, and
-              hi-tech.
-            </p>
-            <p className="mt-4 max-w-[760px] text-sm leading-6 text-slate-400">
-              The team blends homegrown international talent with senior hires
-              from the best of the design and consulting world — frog design,
-              AKQA, FCB Global, IBM, Accenture, Deloitte, McKinsey, and PwC among
-              many others.
-            </p>
-          </section>
+            </nav>
+          </div>
 
-          {/* Brand wall */}
-          <section className="border-t border-white/10 py-10">
-            <p className="eyebrow">Selected organizations served</p>
-            <div className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
-              {brands.map((brand) => (
-                <span key={brand} className="brandmark">
-                  {brand}
+          {/* Mobile — menu button */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen(true)}
+            aria-haspopup="dialog"
+            aria-expanded={menuOpen}
+            className="font-mono text-xs uppercase tracking-[0.3em] text-[#d9d6cd] transition hover:text-[#f4f2ec] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 md:hidden"
+          >
+            Menu
+          </button>
+        </header>
+
+        {/* Full-screen menu — desktop and mobile */}
+        {menuOpen && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation"
+            className="fixed inset-0 z-50 overflow-y-auto bg-[#121210]"
+          >
+            <div className="mx-auto flex w-full max-w-[1360px] flex-col px-6 sm:px-10">
+              <div className="flex items-center justify-between gap-4 pt-6 sm:pt-8">
+                <span className="text-sm font-semibold tracking-tight text-[#f4f2ec] sm:text-base">
+                  Matthew McBride
                 </span>
-              ))}
-            </div>
-          </section>
-
-          {/* Snapshot */}
-          <section id="overview" className="scroll-mt-24 border-t border-white/10 py-12">
-            <p className="eyebrow">Snapshot</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">
-              Enterprise AI In Service Of The Human Experience
-            </h2>
-            <p className="mt-5 text-base leading-7 text-slate-300">
-              I help enterprises adopt AI through a cohesive strategy — one with
-              the foresight, governance, and execution to hold up in the real
-              world, not just on a slide. Having come up through execution and
-              design before strategy, I lead at every layer: shaping what should
-              be built, then making sure it can be delivered, adopted, and
-              operated to create durable value.
-            </p>
-            <p className="mt-4 text-base leading-7 text-slate-300">
-              And I keep the work pointed at people. We already design for agent
-              experience — without abandoning the human one — because the goal is
-              AI that makes organizations, and the people inside them, measurably
-              better.
-            </p>
-            <ul className="mt-7 space-y-3 text-base text-slate-300">
-              {snapshotBullets.map((item) => (
-                <li key={item} className="flex gap-3">
-                  <span
-                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
-                    style={{ backgroundColor: "var(--accent)" }}
-                  />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          {/* Focus */}
-          <section id="focus" className="scroll-mt-24 border-t border-white/10 py-12">
-            <p className="eyebrow">The mandate</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">
-              Enterprise AI &amp; The Autonomous Enterprise
-            </h2>
-            <p className="mt-4 max-w-[680px] text-base leading-7 text-slate-300">
-              I’m leading a refocus of my organization around enterprise AI —
-              setting the strategy, governance, and operating model for an
-              autonomous enterprise where AI agents and people work as one system.
-              The throughline is human: even as we design for agent experience,
-              the work exists to improve the human experience, not replace it.
-            </p>
-            <p className="mt-4 max-w-[680px] text-base leading-7 text-slate-300">
-              And I’m running it inside my own organization first — rebuilding
-              each practice AI-first, from AI-augmented design and business
-              analysis to product management and consulting. The autonomous
-              enterprise isn’t a thesis I advise on; it’s one I’m operating.
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {focusPillars.map((pillar) => (
-                <div
-                  key={pillar.title}
-                  className="lift rounded-sm border border-white/10 p-5"
+                <button
+                  type="button"
+                  onClick={() => setMenuOpen(false)}
+                  className="font-mono text-xs uppercase tracking-[0.3em] text-[#d9d6cd] transition hover:text-[#f4f2ec] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
                 >
-                  <p className="text-sm font-semibold text-slate-100">
-                    {pillar.title}
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-400">
-                    {pillar.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Method */}
-          <section id="method" className="scroll-mt-24 border-t border-white/10 py-12">
-            <p className="eyebrow">Method</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">How I Work</h2>
-            <div className="mt-6 space-y-6">
-              {howIWork.map((item) => (
-                <div
-                  key={item.title}
-                  className="border-l pl-5"
-                  style={{ borderColor: "rgba(95,198,214,0.35)" }}
-                >
-                  <p className="text-sm font-semibold text-slate-100">
-                    {item.title}
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-400">
-                    {item.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Impact */}
-          <section id="impact" className="scroll-mt-24 border-t border-white/10 py-12">
-            <p className="eyebrow">Impact</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">
-              Experience
-            </h2>
-
-            <p className="mt-4 max-w-[680px] text-sm leading-6 text-slate-400">
-              A throughline from human behavior to enterprise AI — I’ve led at
-              every layer, not just the top.
-            </p>
-
-            {/* Career arc — desktop */}
-            <div className="mt-8 hidden sm:flex">
-              {arc.map((s, i) => (
-                <div key={s.label} className="flex-1">
-                  <div className="flex items-center">
-                    <span
-                      className="h-2.5 w-2.5 shrink-0 rounded-full"
-                      style={{ backgroundColor: "var(--accent)" }}
-                    />
-                    {i < arc.length - 1 && (
-                      <span
-                        className="h-px flex-1"
-                        style={{ backgroundColor: "rgba(95,198,214,0.3)" }}
-                        aria-hidden="true"
-                      />
-                    )}
-                  </div>
-                  <p className="mt-3 text-[10px] font-mono uppercase tracking-[0.25em] text-slate-500">
-                    {s.i}
-                  </p>
-                  <p className="mt-2 pr-4 text-sm font-semibold text-slate-100">
-                    {s.label}
-                  </p>
-                  <p className="mt-1 pr-4 text-xs text-slate-500">{s.sub}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Career arc — mobile */}
-            <div className="mt-8 space-y-4 sm:hidden">
-              {arc.map((s) => (
-                <div key={s.label} className="flex items-center gap-3">
-                  <span
-                    className="h-2 w-2 shrink-0 rounded-full"
-                    style={{ backgroundColor: "var(--accent)" }}
-                  />
-                  <div>
-                    <p className="text-sm font-semibold text-slate-100">
-                      {s.label}
-                    </p>
-                    <p className="text-xs text-slate-500">{s.sub}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <p
-              className="mt-6 text-xs font-mono uppercase tracking-[0.25em]"
-              style={{ color: "var(--accent)" }}
-            >
-              Always in service of the human experience
-            </p>
-
-            <div className="mt-12 space-y-10">
-              {experience.map((item) => (
-                <div key={item.title} className="border-t border-white/10 pt-6">
-                  <h3 className="text-lg font-semibold text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
-                    {item.dates}
-                  </p>
-                  <p className="mt-4 text-sm leading-6 text-slate-300">
-                    {item.framing}
-                  </p>
-                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                    {item.modules.map((module) => (
-                      <div
-                        key={module.label}
-                        className="border-l border-white/10 pl-4"
+                  Close
+                </button>
+              </div>
+              <nav className="mt-14 pb-16 sm:mt-20" aria-label="Pages">
+                {allPages.map(
+                  (item) => (
+                    <div key={item.id}>
+                      <Rule />
+                      <button
+                        type="button"
+                        onClick={() => navigate(item.id)}
+                        aria-current={page === item.id ? "page" : undefined}
+                        className={`flex w-full justify-end py-6 text-right text-3xl font-bold tracking-[-0.03em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:py-8 sm:text-5xl ${
+                          page === item.id
+                            ? "text-[#f4f2ec]"
+                            : "text-[#7c7973] hover:text-[#f4f2ec]"
+                        }`}
                       >
-                        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-500">
-                          {module.label}
+                        {item.question}
+                      </button>
+                    </div>
+                  ),
+                )}
+                <Rule />
+              </nav>
+            </div>
+          </div>
+        )}
+
+        <main key={page} className="page-enter flex flex-1 flex-col pb-10">
+          {/* ------------------------------------------------ HOME */}
+          {page === "home" && (
+            <>
+              <div className="pt-16 sm:pt-24">
+                <p className="text-lg text-[#a3a099] sm:text-xl">
+                  Hi, I’m Matthew.
+                </p>
+                <h1 className="mt-6 max-w-[1200px] text-[clamp(2.8rem,8.5vw,6.2rem)] font-bold leading-[1.0] tracking-[-0.04em] text-[#f4f2ec]">
+                  AI strategy is cheap.
+                  <br />
+                  Operating reality isn’t.
+                </h1>
+                <p className="mt-10 max-w-[900px] text-2xl font-medium leading-[1.25] tracking-[-0.01em] text-[#d9d6cd] sm:text-4xl">
+                  I help large enterprises make AI real — and build toward the
+                  autonomous enterprise.
+                </p>
+              </div>
+
+              {/* Question index — the navigation */}
+              <div className="mt-16 sm:mt-24">
+                {sections.map((section) => (
+                  <div key={section.id}>
+                    <Rule />
+                    <button
+                      type="button"
+                      onClick={() => navigate(section.id)}
+                      className="group flex w-full items-center justify-between gap-6 py-7 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:py-9"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="text-2xl font-semibold text-[#7c7973] transition group-hover:translate-x-1 group-hover:text-[#f4f2ec] sm:text-4xl"
+                      >
+                        →
+                      </span>
+                      <span className="text-right text-2xl font-semibold tracking-[-0.02em] text-[#f4f2ec] transition group-hover:translate-x-[-4px] sm:text-4xl">
+                        {section.question}
+                      </span>
+                    </button>
+                  </div>
+                ))}
+                <Rule />
+              </div>
+            </>
+          )}
+
+          {/* ------------------------------------------------ 1. SNAPSHOT */}
+          {page === "snapshot" && (
+            <>
+              <QuestionHeadline>The short version.</QuestionHeadline>
+              <div className="mt-16 sm:mt-24">
+                <Rule />
+                <div className="py-10 sm:py-14">
+                  <Statement>
+                    From human behavior,
+                    <br />
+                    through design and business,
+                    <br />
+                    to enterprise AI.
+                  </Statement>
+                  <p className="mt-8 max-w-[760px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                    I help enterprises adopt AI through a cohesive strategy —
+                    one with the foresight, governance, and execution to hold up
+                    in the real world, not just on a slide.
+                  </p>
+                  <p className="mt-5 max-w-[760px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                    And the work stays pointed at people. We already design for
+                    agent experience — without abandoning the human one.
+                  </p>
+                </div>
+                {snapshotRows.map((row) => (
+                  <div key={row.title}>
+                    <Rule />
+                    <div className="flex flex-col gap-2 py-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10">
+                      <p className="text-2xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-3xl">
+                        {row.title}
+                      </p>
+                      <p className="max-w-[520px] text-base leading-relaxed text-[#a3a099] sm:text-right">
+                        {row.detail}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+                <Rule />
+              </div>
+            </>
+          )}
+
+          {/* ------------------------------------------------ 2. FOCUS */}
+          {page === "focus" && (
+            <>
+              <QuestionHeadline>The mandate.</QuestionHeadline>
+              <div className="mt-16 sm:mt-24">
+                <Rule />
+                <div className="py-10 sm:py-14">
+                  <Statement>
+                    Enterprise AI — run as one system.
+                    <br />
+                    Agents and people together.
+                  </Statement>
+                  <p className="mt-8 max-w-[760px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                    I’m leading a refocus of my organization around enterprise
+                    AI — setting the strategy, governance, and operating model
+                    for an autonomous enterprise. The throughline is human: even
+                    as we design for agent experience, the work exists to
+                    improve the human experience, not replace it.
+                  </p>
+                  <p className="mt-5 max-w-[760px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                    And I’m running it inside my own organization first —
+                    rebuilding each practice AI-first. The autonomous enterprise
+                    isn’t a thesis I advise on; it’s one I’m operating.
+                  </p>
+                </div>
+                {focusPillars.map((pillar) => (
+                  <div key={pillar.title}>
+                    <Rule />
+                    <div className="flex flex-col gap-2 py-8 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10">
+                      <p className="text-2xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-3xl">
+                        {pillar.title}
+                      </p>
+                      <p className="max-w-[520px] text-base leading-relaxed text-[#a3a099] sm:text-right">
+                        {pillar.detail}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+                <Rule />
+              </div>
+            </>
+          )}
+
+          {/* ------------------------------------------------ 3. METHOD */}
+          {page === "method" && (
+            <>
+              <QuestionHeadline>How I work.</QuestionHeadline>
+              <div className="mt-16 sm:mt-24">
+                <Rule />
+                <div className="py-10 sm:py-14">
+                  <Statement>
+                    Three rules,
+                    <br />
+                    learned the hard way.
+                  </Statement>
+                </div>
+                {howIWork.map((item) => (
+                  <div key={item.title}>
+                    <Rule />
+                    <div className="py-8">
+                      <p className="text-2xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-3xl">
+                        {item.title}
+                      </p>
+                      <p className="mt-3 max-w-[720px] text-base leading-relaxed text-[#a3a099] sm:text-lg">
+                        {item.detail}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+                <Rule />
+              </div>
+            </>
+          )}
+
+          {/* ------------------------------------------------ 4. IMPACT */}
+          {page === "impact" && (
+            <>
+              <QuestionHeadline>The track record.</QuestionHeadline>
+              <div className="mt-16 sm:mt-24">
+                <Rule />
+                <div className="py-10 sm:py-14">
+                  <Statement>
+                    The numbers tell it
+                    <br />
+                    faster than I can.
+                  </Statement>
+                  <p className="mt-8 max-w-[760px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                    What began as a sub-20-person design team, I now lead as a
+                    ~500-person global organization — effectively everything but
+                    pure technology inside a full-service digital services firm,
+                    across retail, life sciences, financial services, energy,
+                    and hi-tech.
+                  </p>
+                </div>
+                {metrics.map((metric) => (
+                  <div key={metric.label}>
+                    <Rule />
+                    <div className="flex items-baseline justify-between gap-6 py-7">
+                      <p className="text-3xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-5xl">
+                        {metric.value}
+                      </p>
+                      <p className="text-base text-[#a3a099] sm:text-xl">
+                        {metric.label}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+                <Rule />
+
+                <div className="py-10">
+                  <p className="eyebrow">Selected organizations served</p>
+                  <div className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
+                    {brands.map((brand) => (
+                      <span key={brand} className="brandmark">
+                        {brand}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Rule />
+
+                {/* Career arc */}
+                <div className="py-10">
+                  <p className="eyebrow">The throughline</p>
+                  <div className="mt-8 hidden sm:flex">
+                    {arc.map((s, i) => (
+                      <div key={s.label} className="flex-1">
+                        <div className="flex items-center">
+                          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#f4f2ec]" />
+                          {i < arc.length - 1 && (
+                            <span
+                              className="h-px flex-1 bg-white/25"
+                              aria-hidden="true"
+                            />
+                          )}
+                        </div>
+                        <p className="mt-3 text-[10px] font-mono uppercase tracking-[0.25em] text-[#7c7973]">
+                          {s.i}
                         </p>
-                        <p className="mt-2 text-sm leading-6 text-slate-300">
-                          {module.value}
+                        <p className="mt-2 pr-4 text-base font-semibold text-[#f4f2ec]">
+                          {s.label}
+                        </p>
+                        <p className="mt-1 pr-4 text-sm text-[#7c7973]">
+                          {s.sub}
                         </p>
                       </div>
                     ))}
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Credentials */}
-          <section
-            id="credentials"
-            className="scroll-mt-24 border-t border-white/10 py-12"
-          >
-            <p className="eyebrow">Credibility</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">
-              Credentials &amp; Recognition
-            </h2>
-            <div className="mt-8 grid gap-8 sm:grid-cols-2">
-              <div>
-                <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-500">
-                  Education &amp; certifications
-                </p>
-                <ul className="mt-4 space-y-3 text-sm text-slate-300">
-                  {credentials.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
-                        style={{ backgroundColor: "var(--accent)" }}
-                      />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-5 text-sm leading-6 text-slate-400">
-                  A foundation in human behavior and cognition, design, and
-                  business — the throughline behind keeping AI in service of
-                  people.
-                </p>
-              </div>
-              <div className="space-y-8">
-                <div>
-                  <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-500">
-                    Speaking
-                  </p>
-                  <p className="mt-4 text-sm leading-6 text-slate-300">
-                    Internationally recognized keynote speaker on AI, design, and
-                    the future of work — at events including IBM InterConnect, IT
-                    Arena, and IT Weekend. Selected talks:
-                  </p>
-                  <ul className="mt-3 space-y-2 text-sm text-slate-400">
-                    {speakingTopics.map((talk) => (
-                      <li key={talk.title}>
-                        <span className="text-slate-300">{talk.title}</span>
-                        <span className="text-slate-500"> — {talk.venue}</span>
-                      </li>
+                  <div className="mt-6 space-y-4 sm:hidden">
+                    {arc.map((s) => (
+                      <div key={s.label} className="flex items-center gap-3">
+                        <span className="h-2 w-2 shrink-0 rounded-full bg-[#f4f2ec]" />
+                        <div>
+                          <p className="text-base font-semibold text-[#f4f2ec]">
+                            {s.label}
+                          </p>
+                          <p className="text-sm text-[#7c7973]">{s.sub}</p>
+                        </div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-500">
-                    Teaching
-                  </p>
-                  <ul className="mt-4 space-y-2 text-sm text-slate-300">
-                    <li>Adjunct Professor — Academy of Art University</li>
-                    <li>Instructor — Chicago Portfolio School</li>
-                  </ul>
+                <Rule />
+
+                {/* Experience */}
+                {experience.map((item) => (
+                  <div key={item.title}>
+                    <div className="py-10">
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10">
+                        <h3 className="text-2xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-3xl">
+                          {item.title}
+                        </h3>
+                        <p className="shrink-0 font-mono text-xs uppercase tracking-[0.2em] text-[#7c7973]">
+                          {item.dates}
+                        </p>
+                      </div>
+                      <p className="mt-4 max-w-[820px] text-base leading-relaxed text-[#d9d6cd] sm:text-lg">
+                        {item.framing}
+                      </p>
+                      {item.modules.length > 0 && (
+                        <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                          {item.modules.map((module) => (
+                            <div key={module.label}>
+                              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#7c7973]">
+                                {module.label}
+                              </p>
+                              <p className="mt-2 text-sm leading-relaxed text-[#a3a099]">
+                                {module.value}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <Rule />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {/* ------------------------------------------------ 5. CREDENTIALS */}
+          {page === "credentials" && (
+            <>
+              <QuestionHeadline>The foundation.</QuestionHeadline>
+              <div className="mt-16 sm:mt-24">
+                <Rule />
+                <div className="py-10 sm:py-14">
+                  <Statement>
+                    A foundation in human behavior, design, and business — the
+                    throughline behind keeping AI in service of people.
+                  </Statement>
                 </div>
-                <div>
-                  <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-slate-500">
-                    Board
-                  </p>
-                  <p className="mt-4 text-sm leading-6 text-slate-300">
-                    Member, Board of Directors — The Attention Exchange and
-                    Zedosh, sister companies behind the world’s first regulated
-                    Attention Exchange® (2020–2025).
-                  </p>
+                {credentials.map((item) => (
+                  <div key={item}>
+                    <Rule />
+                    <p className="py-6 text-xl font-medium tracking-[-0.01em] text-[#f4f2ec] sm:text-2xl">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+                <Rule />
+
+                <div className="grid gap-12 py-12 sm:grid-cols-2">
+                  <div>
+                    <p className="eyebrow">Speaking</p>
+                    <p className="mt-5 max-w-[480px] text-base leading-relaxed text-[#d9d6cd] sm:text-lg">
+                      Internationally recognized keynote speaker on AI, design,
+                      and the future of work — IBM InterConnect, IT Arena, IT
+                      Weekend, and more.
+                    </p>
+                    <ul className="mt-5 space-y-3">
+                      {speakingTopics.map((talk) => (
+                        <li key={talk.title} className="text-base">
+                          <span className="font-medium text-[#f4f2ec]">
+                            {talk.title}
+                          </span>
+                          <span className="text-[#7c7973]"> — {talk.venue}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="space-y-10">
+                    <div>
+                      <p className="eyebrow">Teaching</p>
+                      <ul className="mt-5 space-y-2 text-base text-[#d9d6cd] sm:text-lg">
+                        <li>Adjunct Professor — Academy of Art University</li>
+                        <li>Instructor — Chicago Portfolio School</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="eyebrow">Board</p>
+                      <p className="mt-5 max-w-[480px] text-base leading-relaxed text-[#d9d6cd] sm:text-lg">
+                        Member, Board of Directors — The Attention Exchange and
+                        Zedosh, sister companies behind the world’s first
+                        regulated Attention Exchange® (2020–2025).
+                      </p>
+                    </div>
+                  </div>
                 </div>
+                <Rule />
+              </div>
+            </>
+          )}
+
+          {/* ------------------------------------------------ 6. CONTACT */}
+          {page === "contact" && (
+            <>
+              <QuestionHeadline>Let’s talk.</QuestionHeadline>
+              <div className="mt-16 sm:mt-24">
+                <Rule />
+                <div className="py-10 sm:py-14">
+                  <p className="text-lg text-[#a3a099] sm:text-xl">
+                    Email is the fastest way to reach me.
+                  </p>
+                  <div className="mt-8">
+                    <Statement>
+                      I’m always open to executive-level conversations around
+                      digital, AI, transformation — and where they’re all
+                      headed.
+                    </Statement>
+                  </div>
+                </div>
+                <Rule />
+                <div className="flex flex-col items-end gap-6 py-12">
+                  <a
+                    href="mailto:matt@mattmcb.me"
+                    className="text-right text-3xl font-semibold tracking-[-0.03em] text-[#f4f2ec] underline-offset-8 transition hover:underline sm:text-6xl"
+                  >
+                    matt@mattmcb.me
+                  </a>
+                  <div className="flex gap-6 font-mono text-xs uppercase tracking-[0.25em] text-[#a3a099]">
+                    <a
+                      href="https://www.linkedin.com/in/mattmcb"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="border-b border-white/25 pb-1 transition hover:border-white hover:text-white"
+                    >
+                      LinkedIn
+                    </a>
+                    <a
+                      href="mailto:matt@mattmcb.me?subject=R%C3%A9sum%C3%A9%20request"
+                      className="border-b border-white/25 pb-1 transition hover:border-white hover:text-white"
+                    >
+                      Request résumé
+                    </a>
+                  </div>
+                </div>
+                <Rule />
+                <p className="pt-8 text-sm text-[#7c7973]">
+                  Selective public profile. © {new Date().getFullYear()} Matthew
+                  McBride
+                </p>
+              </div>
+            </>
+          )}
+
+          {/* Previous / Next — every section page */}
+          {page !== "home" && (
+            <div className="mt-auto pt-16">
+              <div className="flex items-center justify-between border-t border-white/15 py-10 text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">
+                {prev !== null ? (
+                  <button
+                    type="button"
+                    onClick={() => navigate(prev)}
+                    className="group flex items-center gap-3 text-[#f4f2ec] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="transition group-hover:-translate-x-1"
+                    >
+                      ←
+                    </span>
+                    Previous
+                  </button>
+                ) : (
+                  <span />
+                )}
+                {next !== null ? (
+                  <button
+                    type="button"
+                    onClick={() => navigate(next)}
+                    className="group flex items-center gap-3 text-[#f4f2ec] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                  >
+                    Next
+                    <span
+                      aria-hidden="true"
+                      className="transition group-hover:translate-x-1"
+                    >
+                      →
+                    </span>
+                  </button>
+                ) : (
+                  <span />
+                )}
               </div>
             </div>
-          </section>
-
-          {/* Contact */}
-          <section id="contact" className="scroll-mt-24 border-t border-white/10 py-12">
-            <p className="eyebrow">Connect</p>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Contact</h2>
-            <p className="mt-4 max-w-[640px] text-base leading-7 text-slate-300">
-              Best way to reach me is email. I’m always open and interested in
-              executive-level conversations around digital, AI, transformation,
-              and where they’re all headed.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-5 text-xs font-mono uppercase tracking-[0.25em] text-slate-400">
-              <a
-                href="mailto:matt@mattmcb.me"
-                className="border-b border-white/20 pb-1 transition hover:border-[color:var(--accent)] hover:text-slate-100"
-              >
-                Email
-              </a>
-              <a
-                href="https://www.linkedin.com/in/mattmcb"
-                target="_blank"
-                rel="noreferrer"
-                className="border-b border-white/20 pb-1 transition hover:border-[color:var(--accent)] hover:text-slate-100"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="mailto:matt@mattmcb.me?subject=R%C3%A9sum%C3%A9%20request"
-                className="border-b border-white/20 pb-1 transition hover:border-[color:var(--accent)] hover:text-slate-100"
-              >
-                Request résumé
-              </a>
-            </div>
-          </section>
-
-          <footer className="mt-12 border-t border-white/10 py-10 text-xs text-slate-500">
-            <p>Selective public profile.</p>
-            <p className="mt-2">© {new Date().getFullYear()} Matthew McBride</p>
-          </footer>
-        </div>
-
-        <div className="hidden lg:block" aria-hidden="true" />
+          )}
+        </main>
       </div>
     </div>
   );
