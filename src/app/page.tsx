@@ -65,9 +65,9 @@ const brands = [
 ];
 
 const metrics = [
+  { value: "20+", label: "Years leading enterprise transformation" },
   { value: "500+", label: "Practitioners led" },
   { value: "20+", label: "Countries" },
-  { value: "2,500+", label: "Programs delivered" },
   { value: "Fortune 100", label: "Enterprise clients" },
 ];
 
