@@ -122,7 +122,8 @@ const howIWork = [
 
 const experience = [
   {
-    title: "SVP, Digital Strategy & Innovation — SoftServe",
+    title:
+      "SVP, Global Director, Digital Strategy & Innovation | Office of the CTO | AI Business Transformation — SoftServe",
     dates: "2021–Present",
     framing:
       "Lead a horizontal strategy and delivery organization in the Office of the CTO — now being refocused on enterprise AI strategy and the autonomous enterprise.",
@@ -150,7 +151,8 @@ const experience = [
     ],
   },
   {
-    title: "VP, Digital Strategy & Design — SoftServe",
+    title:
+      "VP Global Director, Digital Strategy | Experience Design | Product Mgmt | Change Mgmt — SoftServe",
     dates: "2020–2021",
     framing:
       "Built the strategic foundation for enterprise transformation work and scaled advisory delivery.",
@@ -173,7 +175,8 @@ const experience = [
     ],
   },
   {
-    title: "VP, Global Experience Design — SoftServe",
+    title:
+      "VP Global Director, Experience Design | Product Design | Service Design — SoftServe",
     dates: "2016–2021",
     framing:
       "Scaled experience design into a global capability that shifted go-to-market focus.",
@@ -194,6 +197,13 @@ const experience = [
           "Positioned experience as a strategic differentiator for enterprise transformation.",
       },
     ],
+  },
+  {
+    title: "Global Director, Head of Design — SoftServe",
+    dates: "2016",
+    framing:
+      "My first role at SoftServe — hired to lead global design. Promoted to VP within six months.",
+    modules: [],
   },
   {
     title: "Senior Manager, Platform Experience — IBM Cloud / IBM Design",
@@ -219,7 +229,7 @@ const experience = [
     ],
   },
   {
-    title: "Earlier — Creative & Design Leadership",
+    title: "Earlier — Digital Experience & Design Leadership",
     dates: "2004–2015",
     framing:
       "Before IBM and SoftServe, I came up through agencies and brands — Associate Creative Director at FCB Global (Fortune 500 financial services), Digital Design Director at Eyemart Express, and Design Director / Partner at SCDS Worldwide — building the craft and execution foundation the later design, strategy, and transformation work is built on.",
