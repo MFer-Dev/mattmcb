@@ -177,7 +177,7 @@ const experience = [
   {
     title:
       "VP Global Director, Experience Design | Product Design | Service Design — SoftServe",
-    dates: "2016–2021",
+    dates: "2016–2020",
     framing:
       "Scaled experience design into a global capability that shifted go-to-market focus.",
     modules: [
