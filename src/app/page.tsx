@@ -711,13 +711,13 @@ export default function Home() {
                 {experience.map((item) => (
                   <div key={item.title}>
                     <div className="py-10">
-                      <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10">
-                        <h3 className="text-2xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-3xl">
-                          {item.title}
-                        </h3>
-                        <p className="shrink-0 font-mono text-xs uppercase tracking-[0.2em] text-[#7c7973]">
+                      <div>
+                        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#7c7973]">
                           {item.dates}
                         </p>
+                        <h3 className="mt-3 max-w-[1080px] text-2xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-3xl">
+                          {item.title}
+                        </h3>
                       </div>
                       <p className="mt-4 max-w-[820px] text-base leading-relaxed text-[#d9d6cd] sm:text-lg">
                         {item.framing}
