@@ -328,7 +328,7 @@ export function PilotTimelineDiagram() {
   ];
   return (
     <svg
-      viewBox="0 0 1200 190"
+      viewBox="0 0 1260 190"
       className="h-auto w-full"
       role="img"
       aria-label="A 90-day pilot in three 30-day phases ending in a value gate."
@@ -376,7 +376,7 @@ export function WavesDiagram() {
     >
       {waves.map((w, i) => {
         const x = 40 + i * 280;
-        const top = 250 - i * 60;
+        const top = 150 - i * 40;
         return (
           <g key={w.n}>
             <rect x={x} y={top} width="270" height={340 - top} fill="none" stroke={i === 3 ? INK : FAINT} strokeWidth={i === 3 ? 1.5 : 1} />
