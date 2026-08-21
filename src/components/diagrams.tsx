@@ -65,10 +65,10 @@ export function FrameworkDiagram() {
   ];
   return (
     <svg
-      viewBox="0 0 1200 600"
+      viewBox="0 0 1200 690"
       className="h-auto w-full"
       role="img"
-      aria-label="The Value Creation Framework: three motions — Shape, Build & Run, Realize — between an assurance and enablement layer above and an AI enablement foundation beneath, looping back from Realize into Shape."
+      aria-label="The Value Creation Framework: three motions — Shape, Build & Run, Realize — between an assurance and enablement layer above, a business process layer and an AI enablement foundation beneath, looping back from Realize into Shape."
     >
       <Arrow id="fw-arrow" />
       {/* Enterprise strategy */}
@@ -134,18 +134,27 @@ export function FrameworkDiagram() {
         REALIZE FEEDS THE NEXT SHAPE — A CLOSED LOOP
       </text>
 
+      {/* Business process layer — where the value sits */}
+      <rect x="40" y="470" width="1120" height="64" fill="none" stroke={INK} strokeWidth="1.5" />
+      <text x="600" y="498" textAnchor="middle" style={sans(20)}>
+        BUSINESS PROCESS LAYER
+      </text>
+      <text x="600" y="520" textAnchor="middle" style={mono(11)}>
+        L1–L5 PROCESS TAXONOMY · DECISION RIGHTS · HUMAN–AI WORKFLOW DESIGN
+      </text>
+
       {/* AI enablement foundation */}
-      <rect x="40" y="478" width="1120" height="64" fill="none" stroke={FAINT} />
-      <text x="600" y="506" textAnchor="middle" style={sans(20)}>
+      <rect x="40" y="562" width="1120" height="64" fill="none" stroke={FAINT} />
+      <text x="600" y="590" textAnchor="middle" style={sans(20)}>
         AI ENABLEMENT FOUNDATION
       </text>
-      <text x="600" y="528" textAnchor="middle" style={mono(11)}>
+      <text x="600" y="612" textAnchor="middle" style={mono(11)}>
         DATA · INTEGRATION · AI &amp; AGENT PLATFORM · REUSABLE COMPONENTS
       </text>
 
       {/* Core systems */}
-      <line x1="40" y1="568" x2="1160" y2="568" stroke={FAINT} />
-      <text x="600" y="592" textAnchor="middle" style={mono(13)}>
+      <line x1="40" y1="652" x2="1160" y2="652" stroke={FAINT} />
+      <text x="600" y="676" textAnchor="middle" style={mono(13)}>
         ENTERPRISE CORE SYSTEMS
       </text>
     </svg>

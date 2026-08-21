@@ -825,8 +825,10 @@ export default function Home() {
                     <p className="mt-8 max-w-[820px] text-base leading-relaxed text-[#a3a099] sm:text-lg">
                       The assurance &amp; enablement layer governs from above —
                       responsible AI, security, risk, architecture, change and
-                      adoption. The AI enablement foundation is the shared
-                      substrate beneath — built once, consumed by every
+                      adoption. The business process layer is where the value
+                      sits — L1–L5 processes, decision rights, human–AI
+                      workflow design. The AI enablement foundation is the
+                      shared substrate beneath — built once, consumed by every
                       workstream. Business capabilities become business
                       outcomes through the three motions between them.
                     </p>
