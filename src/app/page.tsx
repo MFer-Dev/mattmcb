@@ -2,6 +2,15 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { sections, type SectionId } from "@/lib/sections";
+import {
+  BusinessCaseChart,
+  FlywheelDiagram,
+  FoundationStackDiagram,
+  FrameworkDiagram,
+  PilotTimelineDiagram,
+  ValueCurveDiagram,
+  WavesDiagram,
+} from "@/components/diagrams";
 
 type PageId = "home" | SectionId;
 
@@ -237,6 +246,104 @@ const experience = [
   },
 ];
 
+/* --- How I create value ------------------------------------------------- */
+
+const valueSubnav = [
+  { id: "value-framework", label: "The framework" },
+  { id: "value-applied", label: "Applied" },
+  { id: "value-results", label: "Results" },
+] as const;
+
+const vcfPrinciples = [
+  {
+    title: "Score capabilities, not use cases.",
+    detail:
+      "A capability that serves thirty activities is worth an order of magnitude more than its own business case suggests. The first build is chosen for how far it travels, not for what it returns on its own.",
+  },
+  {
+    title: "Build and run are one accountability.",
+    detail:
+      "No throw-it-over-the-wall integration. Engineers sit with the business, iterate in short cycles, and own the capability from first build through live operation.",
+  },
+  {
+    title: "Measure value from the outset.",
+    detail:
+      "The baseline is agreed with Finance before build, not argued after. A value realization lead carries that number from the business case to the end.",
+  },
+  {
+    title: "Adoption gates the benefit claim.",
+    detail:
+      "A capability nobody uses returns nothing. Change is engineered into every motion, and benefits are only claimed on adoption evidence — so change work sits on the critical path.",
+  },
+  {
+    title: "Build the foundation once.",
+    detail:
+      "Data, integration, governance, and the agent platform are shared assets. Every build after the first starts from a proven capability, an evaluation harness, and a control set — not from zero.",
+  },
+  {
+    title: "Transformation is a capability, not a project.",
+    detail:
+      "Shape, Build & Run, and Realize run continuously across the portfolio. Nothing is ever “finished.” That is what makes an enterprise autonomous, not merely automated.",
+  },
+];
+
+const appliedPath = [
+  {
+    n: "01",
+    title: "Assess",
+    detail:
+      "Process pain points and operational maturity across four sites spanning different archetypes — large-scale materials production, specialty chemicals, an R&D campus, and precision manufacturing.",
+  },
+  {
+    n: "02",
+    title: "Prioritize",
+    detail:
+      "Candidate use cases scored with site and functional leaders on ten dimensions — value, urgency, measurability, data readiness, integration complexity, adoption, replicability, risk, time to pilot, platform leverage.",
+  },
+  {
+    n: "03",
+    title: "Quantify",
+    detail:
+      "Benefits, costs, payback, and sensitivity scenarios at process level — every dollar classified as cashable or capacity.",
+  },
+  {
+    n: "04",
+    title: "Design",
+    detail:
+      "A reusable industrial AI capability model: data and asset models, integration to MES, LIMS, CMMS, ERP and historian, edge AI and vision, agentic workflows, governance and MLOps, value tracking.",
+  },
+  {
+    n: "05",
+    title: "Roadmap",
+    detail:
+      "A 90-day pilot with a value gate, then scale in waves by site, process, and value pool.",
+  },
+];
+
+const useCaseFamilies = [
+  { title: "Maintenance planning & reliability", eg: "Risk-score work orders" },
+  { title: "Quality, yield & defect intelligence", eg: "Detect visual defects" },
+  { title: "Site control tower & operational visibility", eg: "Compare site performance" },
+  { title: "Operator, technician & engineer copilots", eg: "Guide troubleshooting" },
+  { title: "EHS, compliance & sustainability", eg: "Surface compliance gaps" },
+  { title: "Simulation, digital twins & physical AI", eg: "Model production constraints" },
+];
+
+const businessCase = [
+  { value: "$13.2M", label: "Four-year benefits, four initiatives" },
+  { value: "$3.7M", label: "One-off implementation" },
+  { value: "$0.7M", label: "Annual run cost" },
+  { value: "≈ 20 mo", label: "Base-case payback" },
+];
+
+const valueDimensions = [
+  { title: "Strategic", detail: "Revenue growth · cost reduction · time-to-value · capability maturity" },
+  { title: "Operational", detail: "Automation rate · cycle time · productivity · quality · error reduction" },
+  { title: "Experience", detail: "Employee adoption · CSAT · NPS · task completion" },
+  { title: "AI performance", detail: "Model quality · agent success rate · hallucination rate · human intervention" },
+  { title: "Financial", detail: "ROI · payback period · cost avoidance · value delivered" },
+];
+
 const credentials = [
   "MBA — International University Isabel I de Castilla",
   "M.S., Artificial Intelligence for Business — Escuela de Negocios Europea de Barcelona",
@@ -291,6 +398,34 @@ export default function Home() {
   const [page, setPage] = useState<PageId>("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoverPage, setHoverPage] = useState<PageId | null>(null);
+  const [activeSub, setActiveSub] = useState<string>(valueSubnav[0].id);
+
+  // Scroll-spy for the in-page anchor nav on "How I create value."
+  useEffect(() => {
+    if (page !== "value") return;
+    const targets = valueSubnav
+      .map((s) => document.getElementById(s.id))
+      .filter((el): el is HTMLElement => Boolean(el));
+    if (targets.length === 0) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSub(entry.target.id);
+        });
+      },
+      { rootMargin: "-20% 0px -70% 0px", threshold: 0 },
+    );
+    targets.forEach((t) => observer.observe(t));
+    return () => observer.disconnect();
+  }, [page]);
+
+  const jumpTo = useCallback((id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const top = el.getBoundingClientRect().top + window.scrollY - 88;
+    window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -617,7 +752,337 @@ export default function Home() {
             </>
           )}
 
-          {/* ------------------------------------------------ 4. IMPACT */}
+          {/* ------------------------------------------------ 4. HOW I CREATE VALUE */}
+          {page === "value" && (
+            <>
+              <QuestionHeadline>How I create value.</QuestionHeadline>
+
+              {/* Sticky anchor nav */}
+              <div className="sticky top-0 z-30 -mx-6 mt-16 border-b border-white/15 bg-[#121210]/95 px-6 backdrop-blur sm:-mx-10 sm:mt-24 sm:px-10">
+                <nav
+                  aria-label="On this page"
+                  className="flex gap-8 overflow-x-auto py-4 font-mono text-[11px] uppercase tracking-[0.3em]"
+                >
+                  {valueSubnav.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => jumpTo(s.id)}
+                      aria-current={activeSub === s.id ? "location" : undefined}
+                      className={`whitespace-nowrap border-b pb-1 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
+                        activeSub === s.id
+                          ? "border-[#f4f2ec] text-[#f4f2ec]"
+                          : "border-transparent text-[#7c7973] hover:text-[#f4f2ec]"
+                      }`}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+
+              {/* ---------- Section 1: The framework ---------- */}
+              <section id="value-framework" className="scroll-mt-24 pt-14 sm:pt-20">
+                <p className="eyebrow">The Value Creation Framework</p>
+                <div className="mt-6">
+                  <Statement>
+                    AI doesn’t create value.
+                    <br />
+                    Better business capabilities do.
+                  </Statement>
+                </div>
+                <p className="mt-8 max-w-[820px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                  95% of enterprise generative-AI pilots produce no measurable
+                  impact on the P&amp;L. Not because the models are bad — because
+                  AI is bolted onto workflows, processes, and operating models
+                  that were never redesigned for it.{" "}
+                  <span className="font-semibold text-[#f4f2ec]">
+                    The technology works. The delivery model doesn’t.
+                  </span>
+                </p>
+                <p className="mt-5 max-w-[820px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                  The prevailing model splits ownership three ways: consultants
+                  define the opportunity and step back, integrators build
+                  against problems they didn’t help define, and change teams
+                  arrive after the solution is designed. Value is measured — if
+                  at all — after everything ships. I built the Value Creation
+                  Framework to fix that:{" "}
+                  <span className="font-semibold text-[#f4f2ec]">
+                    one operating model that owns the whole value lifecycle.
+                  </span>
+                </p>
+                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.25em] text-[#7c7973]">
+                  Source: MIT Project NANDA, “The GenAI Divide,” 2025
+                </p>
+
+                <div className="mt-14 sm:mt-20">
+                  <Rule />
+                  <div className="py-10 sm:py-14">
+                    <p className="eyebrow">Three motions, three questions</p>
+                    <div className="mt-8">
+                      <FrameworkDiagram />
+                    </div>
+                    <p className="mt-8 max-w-[820px] text-base leading-relaxed text-[#a3a099] sm:text-lg">
+                      The assurance &amp; enablement layer governs from above —
+                      responsible AI, security, risk, architecture, change and
+                      adoption. The AI enablement foundation is the shared
+                      substrate beneath — built once, consumed by every
+                      workstream. Business capabilities become business
+                      outcomes through the three motions between them.
+                    </p>
+                  </div>
+                  <Rule />
+
+                  <div className="grid gap-10 py-10 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] sm:items-center sm:py-14">
+                    <div>
+                      <p className="eyebrow">The continuous lifecycle</p>
+                      <div className="mt-6">
+                        <Statement>
+                          Shape. Build. Run. Realize.
+                          <br />
+                          Then back into Shape.
+                        </Statement>
+                      </div>
+                      <p className="mt-6 max-w-[520px] text-base leading-relaxed text-[#a3a099] sm:text-lg">
+                        Inside a program, the weighting shifts — shape-heavy
+                        early, then build-and-run, then sustained realization.
+                        Across the portfolio, all three motions run
+                        continuously and permanently. It is not a waterfall.
+                      </p>
+                    </div>
+                    <FlywheelDiagram />
+                  </div>
+                  <Rule />
+
+                  <div className="pt-10 sm:pt-14">
+                    <p className="eyebrow">Principles that govern the framework</p>
+                  </div>
+                  {vcfPrinciples.map((item) => (
+                    <div key={item.title}>
+                      <div className="py-8">
+                        <p className="text-2xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-3xl">
+                          {item.title}
+                        </p>
+                        <p className="mt-3 max-w-[760px] text-base leading-relaxed text-[#a3a099] sm:text-lg">
+                          {item.detail}
+                        </p>
+                      </div>
+                      <Rule />
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* ---------- Section 2: Applied ---------- */}
+              <section id="value-applied" className="scroll-mt-24 pt-20 sm:pt-28">
+                <p className="eyebrow">
+                  The framework, applied — a global manufacturer, four sites
+                </p>
+                <div className="mt-6">
+                  <Statement>
+                    From AI use cases
+                    <br />
+                    to industrial AI operations.
+                  </Statement>
+                </div>
+                <p className="mt-8 max-w-[820px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                  <span className="font-semibold text-[#f4f2ec]">The brief:</span>{" "}
+                  a maintenance planning OKR — urgent, measurable, tied directly
+                  to margin.{" "}
+                  <span className="font-semibold text-[#f4f2ec]">The trap:</span>{" "}
+                  solve it with a point solution, then repeat the same data,
+                  integration, security, governance, and change work for every
+                  use case that follows. Visible activity, limited enterprise
+                  leverage.
+                </p>
+                <p className="mt-5 max-w-[820px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                  <span className="font-semibold text-[#f4f2ec]">The approach:</span>{" "}
+                  deliver the maintenance win first — while building the shared
+                  capabilities every later use case will reuse.
+                </p>
+
+                <div className="mt-14 sm:mt-20">
+                  <Rule />
+                  <div className="py-10 sm:py-14">
+                    <p className="eyebrow">Build the foundation once</p>
+                    <div className="mt-8">
+                      <FoundationStackDiagram />
+                    </div>
+                  </div>
+                  <Rule />
+
+                  <div className="pt-10 sm:pt-14">
+                    <p className="eyebrow">The path — discovery to decision</p>
+                  </div>
+                  {appliedPath.map((step) => (
+                    <div key={step.n}>
+                      <div className="grid gap-3 py-8 sm:grid-cols-[80px_minmax(0,1fr)] sm:gap-8">
+                        <p className="font-mono text-xs tracking-[0.25em] text-[#7c7973]">
+                          {step.n}
+                        </p>
+                        <div>
+                          <p className="text-2xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-3xl">
+                            {step.title}
+                          </p>
+                          <p className="mt-3 max-w-[760px] text-base leading-relaxed text-[#a3a099] sm:text-lg">
+                            {step.detail}
+                          </p>
+                        </div>
+                      </div>
+                      <Rule />
+                    </div>
+                  ))}
+
+                  <div className="py-10 sm:py-14">
+                    <p className="eyebrow">A cohesive portfolio, not a collection of pilots</p>
+                    <p className="mt-6 max-w-[760px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                      Candidate use cases organize into six families that share
+                      the same technical and operational components.
+                    </p>
+                    <div className="mt-8 grid gap-x-10 sm:grid-cols-2">
+                      {useCaseFamilies.map((f) => (
+                        <div key={f.title} className="border-t border-white/15 py-5">
+                          <p className="text-lg font-semibold tracking-[-0.01em] text-[#f4f2ec] sm:text-xl">
+                            {f.title}
+                          </p>
+                          <p className="mt-1 text-sm text-[#7c7973]">e.g., {f.eg}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <Rule />
+
+                  <div className="py-10 sm:py-14">
+                    <p className="eyebrow">Prove it in 90 days</p>
+                    <p className="mt-6 max-w-[760px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                      One site. One or two high-value use cases. A clear
+                      operational owner, baseline and target KPIs, a
+                      human-in-the-loop workflow, and value tracking from day
+                      one — narrow enough to deliver quickly, designed with
+                      reusable components that carry the broader program.
+                    </p>
+                    <div className="mt-8">
+                      <PilotTimelineDiagram />
+                    </div>
+                  </div>
+                  <Rule />
+
+                  <div className="py-10 sm:py-14">
+                    <p className="eyebrow">Then scale in waves</p>
+                    <div className="mt-8">
+                      <WavesDiagram />
+                    </div>
+                  </div>
+                  <Rule />
+
+                  <div className="py-10 sm:py-14">
+                    <p className="eyebrow">The team</p>
+                    <div className="mt-6">
+                      <Statement>
+                        Strategy-led. Operations-aware. AI-enabled.
+                      </Statement>
+                    </div>
+                    <p className="mt-6 max-w-[760px] text-base leading-relaxed text-[#a3a099] sm:text-lg">
+                      A blended team working as an extension of the client’s
+                      technology organization — a strategy lead, domain experts
+                      who know the plant floor, a data and platform architect,
+                      AI and agentic automation specialists, and a value
+                      realization lead who carries the business-case baseline
+                      from the first workshop to the last benefits review.
+                    </p>
+                  </div>
+                  <Rule />
+                </div>
+              </section>
+
+              {/* ---------- Section 3: Results ---------- */}
+              <section id="value-results" className="scroll-mt-24 pt-20 sm:pt-28">
+                <p className="eyebrow">
+                  What it returns — a real Phase 2 business case, anonymized
+                </p>
+                <div className="mt-6">
+                  <Statement>
+                    Four initiatives. Quantified at process level.
+                    <br />
+                    Stress-tested across six scenarios.
+                  </Statement>
+                </div>
+
+                <div className="mt-14 sm:mt-20">
+                  {businessCase.map((m) => (
+                    <div key={m.label}>
+                      <Rule />
+                      <div className="flex items-baseline justify-between gap-6 py-7">
+                        <p className="text-3xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-5xl">
+                          {m.value}
+                        </p>
+                        <p className="text-right text-base text-[#a3a099] sm:text-xl">
+                          {m.label}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                  <Rule />
+                  <p className="max-w-[760px] py-8 text-base leading-relaxed text-[#a3a099] sm:text-lg">
+                    Positive return within 24 months in four of six stress
+                    scenarios — implementation costs +20%, benefits −20%, and
+                    combinations. Benefits accrue from roll-out completion,
+                    20–32 weeks in. Figures from a real multi-site
+                    manufacturing program, anonymized.
+                  </p>
+                  <Rule />
+
+                  <div className="py-10 sm:py-14">
+                    <BusinessCaseChart />
+                  </div>
+                  <Rule />
+
+                  <div className="py-10 sm:py-14">
+                    <p className="eyebrow">Value is planned, tracked, and banked site by site</p>
+                    <p className="mt-6 max-w-[760px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
+                      A pilot site proves the model; waves add sites on a
+                      quarterly cadence; every benefit is tracked as{" "}
+                      <span className="font-semibold text-[#f4f2ec]">cashable</span>{" "}
+                      (reduced external spend, hard savings) or{" "}
+                      <span className="font-semibold text-[#f4f2ec]">capacity</span>{" "}
+                      (hours returned to production) from day one.
+                    </p>
+                    <div className="mt-8">
+                      <ValueCurveDiagram />
+                    </div>
+                  </div>
+                  <Rule />
+
+                  <div className="pt-10 sm:pt-14">
+                    <p className="eyebrow">Value tracked across five dimensions</p>
+                  </div>
+                  {valueDimensions.map((d) => (
+                    <div key={d.title}>
+                      <div className="flex flex-col gap-2 py-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10">
+                        <p className="text-2xl font-semibold tracking-[-0.02em] text-[#f4f2ec] sm:text-3xl">
+                          {d.title}
+                        </p>
+                        <p className="max-w-[560px] text-base text-[#a3a099] sm:text-right sm:text-lg">
+                          {d.detail}
+                        </p>
+                      </div>
+                      <Rule />
+                    </div>
+                  ))}
+
+                  <div className="py-12">
+                    <Statement>
+                      Measured against operational outcomes.
+                      <br />
+                      Not activity.
+                    </Statement>
+                  </div>
+                </div>
+              </section>
+            </>
+          )}
+
+          {/* ------------------------------------------------ 5. IMPACT */}
           {page === "impact" && (
             <>
               <QuestionHeadline>The track record.</QuestionHeadline>
