@@ -150,7 +150,7 @@ const experience = [
       {
         label: "Operating Model",
         value:
-          "Everything but pure technology — design and experience, business analysis, product management, consulting, value realization, digital strategy, enterprise architecture, change management, and transformation program management (governance).",
+          "Design and experience, business analysis, product management, consulting, value realization, digital strategy, enterprise architecture, change management, and transformation program management (governance) — integrated with engineering delivery across the portfolio.",
       },
       {
         label: "Delivery Reality",
@@ -494,7 +494,7 @@ export default function Home() {
             </span>
             <span className="hidden text-[#7c7973] md:inline">
               {" "}
-              · Enterprise AI &amp; Transformation Executive
+              · Human-Centered Technology Executive
             </span>
           </button>
           {/* Desktop — horizontal page indicator */}
@@ -651,7 +651,8 @@ export default function Home() {
                     to enterprise AI.
                   </Statement>
                   <p className="mt-8 max-w-[760px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
-                    I help enterprises adopt AI through a cohesive strategy —
+                    I’m a technologist — a human-centered one. I help
+                    enterprises adopt AI through a cohesive strategy —
                     one with the foresight, governance, and execution to hold up
                     in the real world, not just on a slide.
                   </p>
@@ -1098,9 +1099,9 @@ export default function Home() {
                   </Statement>
                   <p className="mt-8 max-w-[760px] text-lg leading-relaxed text-[#d9d6cd] sm:text-xl">
                     What began as a sub-20-person design team, I now lead as a
-                    ~500-person global organization — effectively everything but
-                    pure technology inside a full-service digital services firm,
-                    across retail, life sciences, financial services, energy,
+                    ~500-person global organization — spanning strategy, design,
+                    architecture, and delivery inside a full-service digital
+                    services firm, across retail, life sciences, financial services, energy,
                     and hi-tech.
                   </p>
                 </div>

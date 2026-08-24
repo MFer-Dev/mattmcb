@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.mattmcb.me"),
   title: {
-    default: "Matthew McBride — Enterprise AI & Transformation Executive",
+    default: "Matthew McBride — Human-Centered Technology Executive | Enterprise AI & Transformation",
     template: "%s  |  Matthew McBride",
   },
   description:
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://www.mattmcb.me/",
     siteName: "Matthew McBride",
-    title: "Matthew McBride — Enterprise AI & Transformation Executive",
+    title: "Matthew McBride — Human-Centered Technology Executive | Enterprise AI & Transformation",
     description:
       "Helping large enterprises turn AI into operating reality and build toward the autonomous enterprise.",
     images: [
@@ -48,13 +48,13 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Matthew McBride — Enterprise AI & Transformation Executive",
+        alt: "Matthew McBride — Human-Centered Technology Executive | Enterprise AI & Transformation",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Matthew McBride — Enterprise AI & Transformation Executive",
+    title: "Matthew McBride — Human-Centered Technology Executive | Enterprise AI & Transformation",
     description:
       "Helping large enterprises turn AI into operating reality and build toward the autonomous enterprise.",
     images: ["/og.png"],
